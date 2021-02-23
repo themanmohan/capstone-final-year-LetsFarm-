@@ -1,0 +1,14 @@
+{
+  "name": "letsfarm",
+  "version": "1.0.0",
+  "description": "This website give the information about farming product and msp and many other feature",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Manmohan kumar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
