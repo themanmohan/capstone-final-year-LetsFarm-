@@ -1,10 +1,11 @@
-var express = require("express")
-var dbconnection = require("./Config/dbConnection")
-var AllIndiaRoute = require("./route/AllIndia")
+const express = require("express")
+const dbconnection = require("./Config/dbConnection")
+const AllIndiaRoute = require("./route/AllIndia")
 const AuthRoute=require("./route/User")
 const ExpertRoute = require("./route/experts/experts")
 const ReviewsRoute = require("./route/experts/reviews")
-var ejs = require("ejs")
+const methodOverride = require("method-override")
+const ejs = require("ejs")
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -33,9 +34,13 @@ app.use(
     })
 );
 
+app.use(methodOverride("_method"))
+
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 
 // Connect flash
 app.use(flash());
@@ -57,7 +62,7 @@ app.set("view engine", "ejs")
 app.use('/AllIndia', AllIndiaRoute)
 app.use('/users', AuthRoute) 
 app.use('/experts', ExpertRoute) 
-app.use('/AllIndia', ReviewsRoute)
+app.use('/experts/:expert_id/reviews', ReviewsRoute)
 
 
 

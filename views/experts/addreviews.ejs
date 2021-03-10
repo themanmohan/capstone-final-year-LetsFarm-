@@ -1,10 +1,10 @@
 <%- include("../partials/header") %>
     <div class="container">
         <div class="row">
-            <h1 style="text-align: center">New Review: <%= university.name %>
+            <h1 style="text-align: center">New Review: <%= expert.name %>
             </h1>
             <div style="width: 30%; margin: 25px auto;">
-                <form action="/University/<%= university._id %>/reviews" method="POST">
+                <form action="/experts/<%= expert._id %>/reviews" method="POST">
                     <div class="form-group">
                         <label for="rating">Leave a rating:</label>
                         <fieldset class="starability-basic form-group" id="rating">
