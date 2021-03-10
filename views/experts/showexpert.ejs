@@ -1,0 +1,19 @@
+<h1>Uploaded Images</h1>
+<div>
+    <% items.forEach(function(expert) { %>
+        <div>
+            <div>
+                <img src="data:image/<%=expert.img.contentType%>;base64,
+					<%=expert.img.data.toString('base64')%>">
+                <div>
+                    <h5>
+                        <%= expert.name %>
+                    </h5>
+                    <p>
+                        <%= expert.desc %>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+</div>

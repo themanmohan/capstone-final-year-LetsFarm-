@@ -1,8 +1,14 @@
 var express = require('express');
 var AllIndia=require("../model/AllIndia")
+const {authorize,isLoggedIn}=require("../middleware/auth")
 var router = express.Router();
 
-router.get("/add", async (req, res) => {
+
+router.get('/', (req, res) => {
+   res.render('index')
+})
+
+router.get("/add",isLoggedIn, async (req, res) => {
     const data = [{
             Wheat: 2323432434
         },
@@ -26,7 +32,7 @@ router.get("/add", async (req, res) => {
 
 })
 
-router.get('/show', async (req, res) => {
+router.get('/show', authorize('admin'), async (req, res) => {
     try {
         const details = await AllIndia.find()
         res.render('AllindiaCrop/show.ejs', {
@@ -36,5 +42,7 @@ router.get('/show', async (req, res) => {
         console.log(err)
     }
 })
+
+
 
 module.exports=router
