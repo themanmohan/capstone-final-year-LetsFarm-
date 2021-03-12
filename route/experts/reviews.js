@@ -1,28 +1,31 @@
-var express = require("express");
-var router = express.Router({
+const express = require("express");
+const router = express.Router({
     mergeParams: true
 });
-var Expert = require("../../model/experts/expert");
-var Review = require("../../model/experts/reviews");
+const Expert = require("../../model/experts/expert");
+const Review = require("../../model/experts/reviews");
 const {
     authorize,
     isLoggedIn
 } = require("../../middleware/auth")
 // var middleware = require("../middleware/middleware");
-
-// Reviews Index
+//@desc      show expert review
+//@route     GET//experts/:expert_id/reviews
+//@access    public
 router.get("/", function (req, res) {
+    
     Expert.findById(req.params.expert_id).populate({
         path: "reviews",
         options: {
             sort: {
                 createdAt: -1
             }
-        } // sorting the populated reviews array to show the latest first
+        }
+     // sorting the populated reviews array to show the latest first
     }).exec(function (err, expert) {
         console.log(expert)
         if (err || !expert) {
-            // req.flash("error", err.message);
+            req.flash("error", "something went wrong");
             return res.redirect("back");
         }
         res.render("experts/showallreviews", {
@@ -32,9 +35,10 @@ router.get("/", function (req, res) {
     });
 });
 
-// Reviews New
+//@desc      add expert review
+//@route     GET//experts/:expert_id/reviews/new
+//@access    private
 router.get("/new", isLoggedIn, function (req, res) {
-    // middleware.checkReviewExistence checks if a user already reviewed the campground, only one review per user is allowed
     Expert.findById(req.params.expert_id, function (err, data) {
         if (err) {
             req.flash("error", err.message);
@@ -49,31 +53,32 @@ router.get("/new", isLoggedIn, function (req, res) {
   
 });
 
-// Reviews Create
+//@desc      add expert review
+//@route     POST/experts/:expert_id/reviews
+//@access    private
 router.post("/", isLoggedIn, function (req, res) {
-    //lookup campground using ID
+    
     Expert.findById(req.params.expert_id).populate("reviews").exec(function (err, expert) {
         if (err) {
             req.flash("error", err.message);
             return res.redirect("back");
         }
-        console.log(expert.reviews)
         Review.create(req.body.review, function (err, review) {
-            console.log(review)
             if (err) {
                 req.flash("error", err.message);
                 return res.redirect("back");
             }
-            //add author username/id and associated campground to the review
+            console.log(req.user)
+            //add author username/id and associated expert to the review
             review.author.id = req.user._id;
-            review.author.username = req.user.username;
+            review.author.username = req.user.name;
             review.experts = expert;
             //save review
             review.save();
             expert.reviews.push(review);
-            // calculate the new average review for the campground
+            // calculate the new average review for the expert
             expert.rating = calculateAverage(expert.reviews);
-            //save campground
+            //save expert
             expert.save();
             req.flash("success", "Your review has been successfully added.");
             res.redirect('/experts/showexpert' );
@@ -81,7 +86,9 @@ router.post("/", isLoggedIn, function (req, res) {
     });
 });
 
-// Reviews Edit
+//@desc      update expert review
+//@route     GET//experts/:expert_id/reviews/:review_id/edit
+//@access    private
 router.get("/:review_id/edit", isLoggedIn, function (req, res) {
     Review.findById(req.params.review_id, function (err, foundReview) {
         if (err) {
@@ -95,7 +102,9 @@ router.get("/:review_id/edit", isLoggedIn, function (req, res) {
     });
 });
 
-// Reviews Update
+//@desc      update expert review
+//@route     PUT/experts/:expert_id/reviews/:review_id
+//@access    private
 router.put("/:review_id", isLoggedIn, function (req, res) {
     Review.findByIdAndUpdate(req.params.review_id, req.body.review, {
         new: true
@@ -109,7 +118,7 @@ router.put("/:review_id", isLoggedIn, function (req, res) {
                 req.flash("error", err.message);
                 return res.redirect("back");
             }
-            // recalculate campground average
+            // recalculate expert average
             expert.rating = calculateAverage(expert.reviews);
             //save changes
             expert.save();
@@ -119,7 +128,9 @@ router.put("/:review_id", isLoggedIn, function (req, res) {
     });
 });
 
-// Reviews Delete
+//@desc      delete expert review
+//@route     GET//experts/:expert_id/reviews/:review_id
+//@access    private
 router.delete("/:review_id", isLoggedIn, function (req, res) {
     Review.findByIdAndRemove(req.params.review_id, function (err) {
         if (err) {
@@ -137,7 +148,7 @@ router.delete("/:review_id", isLoggedIn, function (req, res) {
                 req.flash("error", err.message);
                 return res.redirect("back");
             }
-            // recalculate campground average
+            // recalculate expert average
             expert.rating = calculateAverage(expert.reviews);
             //save changes
             expert.save();
@@ -146,6 +157,9 @@ router.delete("/:review_id", isLoggedIn, function (req, res) {
         });
     });
 });
+
+//calculating average rating
+
 
 function calculateAverage(reviews) {
     if (reviews.length === 0) {

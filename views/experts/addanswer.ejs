@@ -1,0 +1,22 @@
+<%- include("../partials/header") %>
+    <div class="container">
+        <div class="row">
+            <h1 style="text-align: center">New Review:>
+            </h1>
+            <div style="width: 30%; margin: 25px auto;">
+                <form action="/experts/<%= expert_id %>/qustion/<%= qustion_id %>/answer" method="POST">
+                    <div class="form-group">
+                        <label for="rating">Leave a rating:</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" type="text" name="answer[text]"
+                            placeholder="Write a qustion for this expert..." rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">Submit a Answer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <%- include("../partials/footer") %>

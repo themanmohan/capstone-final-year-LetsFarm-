@@ -2,24 +2,18 @@ var mongoose = require("mongoose");
 
 var reviewSchema = new mongoose.Schema({
     rating: {
-        // Setting the field type
         type: Number,
-        // Making the star rating required
         required: "Please provide a rating (1-5 stars).",
-        // Defining min and max values
         min: 1,
-        max: 5,
-        // Adding validation to see if the entry is an integer
         validate: {
-            // validator accepts a function definition which it uses for validation
             validator: Number.isInteger,
             message: "{VALUE} is not an integer value."
         }
     },
-    // review text
+    // qustion
     text: {
         type: String,
-        required: "Please provide description.",
+        required: "Please provide qustion.",
     },
     // author id and username fields
     author: {
@@ -29,13 +23,12 @@ var reviewSchema = new mongoose.Schema({
         },
         username: String
     },
-    // campground associated with the review
+    // expert associated with the qustion
     experts: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Expert"
     }
 }, {
-    // if timestamps are set to true, mongoose assigns createdAt and updatedAt fields to your schema, the type assigned is Date.
     timestamps: true
 });
 

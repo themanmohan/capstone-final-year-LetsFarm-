@@ -1,14 +1,19 @@
 const express = require("express")
 const dbconnection = require("./Config/dbConnection")
+//route
 const AllIndiaRoute = require("./route/AllIndia")
 const AuthRoute=require("./route/User")
 const ExpertRoute = require("./route/experts/experts")
 const ReviewsRoute = require("./route/experts/reviews")
+const QustionRoute = require("./route/experts/qustion")
+const AnswerRoute = require("./route/experts/answer")
+
 const methodOverride = require("method-override")
-const ejs = require("ejs")
+
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
+require("ejs")
 //env
 require('dotenv').config()
 require('./Config/passport')(passport);
@@ -54,8 +59,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-
-
 //settting view engine ejs
 app.set("view engine", "ejs")
 
@@ -63,7 +66,8 @@ app.use('/AllIndia', AllIndiaRoute)
 app.use('/users', AuthRoute) 
 app.use('/experts', ExpertRoute) 
 app.use('/experts/:expert_id/reviews', ReviewsRoute)
-
+app.use('/experts/:expert_id/qustion', QustionRoute)
+app.use('/experts/:expert_id/qustion/:qustion_id/answer', AnswerRoute)
 
 
 
