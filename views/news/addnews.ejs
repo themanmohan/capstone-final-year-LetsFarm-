@@ -1,0 +1,36 @@
+<%- include("../partials/header") %>
+    <div class="container">
+        <div class="row">
+            <h1 class="demo" style="text-align: center">New News:>
+            </h1>
+            <div style="width: 30%; margin: 25px auto;">
+                <form action="/news" method="POST">
+                    <div class="form-group">
+                        <label for="rating">add news:</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">heading</label>
+                        <input type="text" name="news[heading]" class="form-control" id="" placeholder="heading">
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">text</label>
+                        <textarea class="form-control" type="text" name="news[text]"
+                            placeholder="Write a news...." rows="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                    <label>Select list</label>
+                    <select id="myList" class="form-control" name=news[categories]>
+                        <option value="MSP">MSP</option>
+                        <option value="fertilizer">fertilizer</option>
+                        <option value="all">all</option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">Submit news</button>
+                    </div>
+                </form>
+             
+            </div>
+        </div>
+    </div>
+    <%- include("../partials/footer") %>

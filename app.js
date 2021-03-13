@@ -7,6 +7,7 @@ const ExpertRoute = require("./route/experts/experts")
 const ReviewsRoute = require("./route/experts/reviews")
 const QustionRoute = require("./route/experts/qustion")
 const AnswerRoute = require("./route/experts/answer")
+const NewsRoute = require("./route/news/news")
 
 const methodOverride = require("method-override")
 
@@ -64,6 +65,7 @@ app.set("view engine", "ejs")
 
 app.use('/AllIndia', AllIndiaRoute)
 app.use('/users', AuthRoute) 
+app.use('/news', NewsRoute)
 app.use('/experts', ExpertRoute) 
 app.use('/experts/:expert_id/reviews', ReviewsRoute)
 app.use('/experts/:expert_id/qustion', QustionRoute)

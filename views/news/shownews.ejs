@@ -1,0 +1,77 @@
+<%- include("../partials/header") %>
+    <div class="filter-container">
+        <input type="text" id="filter" class="filter" placeholder="Filter posts...">
+    </div>
+    <div class="container-fluid">
+        <div id="posts-container">
+            <div class="row">
+                <div class="col-md-8">
+                    <%if(cnews.length>0){%>
+                        <% cnews.forEach((news)=>{%>
+                            <a href="/news/<%=news._id%>">
+                            <div class="post">
+                                <div class="number">5</div>
+                                <div class="post-info">
+                                   <h2 class="post-title">
+                                        <%=news.heading%>
+                                    </h2>
+                                    <p class="post-body">
+                                        <%=news.text.slice(0, 400)%>
+                                    </p>
+                                </div>
+                            </div>
+                            </a>
+                            <%})%>
+                                <%}%>
+
+                                    <%if(cnews.length===0){%>
+                                        <% news.forEach((news)=>{%>
+                                            <a href="/news/<%=news._id%>">
+                                            <div class="post">
+                                                <div class="number">5</div>
+                                                <div class="post-info">
+                                                    <h2 class="post-title">
+                                                        <%=news.heading%>
+                                                    </h2>
+                                                    <p class="post-body">
+                                                        <%=news.text.slice(0, 400)%>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                               </a>
+                                            <%})%>
+                                        <%}%>
+
+                </div>
+                <div class="col-md-3">
+                    <h3>categories</h3>
+                    <% let unews=news.map((news)=>{%>
+                        <% return news.categories %>
+                            <%})%>
+                                <%let x=(unews)=> unews.filter((v,i) => unews.indexOf(v) === i)%>
+                                    <%let d=[...x(unews)]%>
+                                        <%d.forEach((d)=>{%>
+
+                                            <a href="/news?categories=<%=d%>">
+                                                <%=d%>
+                                                    <h4></h4>
+                                            </a>
+                                            <%})%>
+
+                                 <div class="row mt-5">
+                                     <div class="col-md-12">
+                                          <h4>latest news</h4>
+                                         <%news.slice(0,5).forEach((news)=>{%>
+                                            <a href="/news/<%=news._id%>"><h6>*<%=news.heading%></h6></a>
+                                         <%})%>
+                                     </div>
+                                 </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <%- include("../partials/footer") %>
