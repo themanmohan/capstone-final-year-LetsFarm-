@@ -32,7 +32,7 @@ router.get("/add",isLoggedIn, async (req, res) => {
 
 })
 
-router.get('/show', authorize('admin'), async (req, res) => {
+router.get('/show', isLoggedIn, async (req, res) => {
     try {
         const details = await AllIndia.find()
         res.render('AllindiaCrop/show.ejs', {

@@ -13,6 +13,10 @@ const Expert = require('../../model/experts/expert');
 const Review = require('../../model/experts/reviews');
 const Qustion = require('../../model/experts/qustion');
 const router = express.Router();
+
+
+
+
 //define distination or file name for image
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -79,7 +83,7 @@ router.get('/addexpert',isLoggedIn,authorize('admin'), (req, res) => {
 //@desc      add expert
 //@route     POST/experts/addexpert
 //@access    private(admin only)
-router.post('/addexpert',isLoggedIn,authorize('admin'), upload.single('image'), (req, res, next) => {
+router.post('/addexpert',isLoggedIn,authorize('admin'), upload.single('image'), (req, res) => {
 
     var obj = {
         name: req.body.name,
@@ -89,6 +93,7 @@ router.post('/addexpert',isLoggedIn,authorize('admin'), upload.single('image'), 
             contentType: 'image/png'
         }
     }
+    console.log(req.file.filename)
 
     Expert.create(obj, (err, item) => {
         if (err) {

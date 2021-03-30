@@ -19,7 +19,7 @@ router.get('/new', isLoggedIn, authorize('admin'), (req, res) => {
 //@desc      display all news 
 //@route     GET/news
 //@access    private
-router.get('/', (req, res) => {
+router.get('/',isLoggedIn, (req, res) => {
     const page = parseInt(req.query.page)
     const limit = parseInt(req.query.limit)
     const startIndex=(page-1)*limit;
@@ -42,8 +42,7 @@ router.get('/', (req, res) => {
          }
      }
      News.find().countDocuments().then(data=>{
-         results.count = Math.ceil(80 / limit)
-         console.log(results)
+         results.count = Math.ceil(20 / limit)
      })
  
     
@@ -58,10 +57,15 @@ router.get('/', (req, res) => {
         const fountCategories = news.filter((news) => {
             return news.categories == req.query.categories
         })
-        res.render("news/shownews", {
-            cnews: fountCategories,
-            results
+
+        News.find().then((news)=>{
+            res.render("news/shownews", {
+                cnews: fountCategories,
+                results,
+                news
+            })
         })
+        
     })
     
 

@@ -1,0 +1,42 @@
+<%- include("../partials/header") %>
+    <div class="container">
+        <div class="row">
+            <h1 class="demo" style="text-align: center">Add snapshot of photo
+            </h1>
+            <div style="width: 30%; margin: 25px auto;">
+                <form action="/soildetails" method="POST" enctype="multipart/form-data">
+                    <label for="image">Upload Image</label>
+                    <input type="file" id="image" name="image" value="" required>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block">Submit detail</button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <%if(detail) {%>
+                    <%detail.filter(detail=>{%>
+                        <%if(detail.name===currentUser.name){%>
+                            <%detail.report.forEach(report=>{%>
+                                <div class="container bg-success">
+                                <div class="report">
+                                    <%=report.report%>
+                                </div>
+                                </div>
+                               
+                                    <%})%>
+                                        <%}%>
+                                            <%})%>
+                                                <%}%>
+            </div>
+        </div>
+    </div>
+
+
+
+    <%- include("../partials/footer") %>

@@ -1,0 +1,22 @@
+<%- include("../partials/header") %>
+    <div class="container">
+        <div class="row">
+            <h1 style="text-align: center">New Review: <%= detail.name %>
+            </h1>
+            <div style="width: 30%; margin: 25px auto;">
+                <form action="/soildetails/<%= detail_id %>/report" method="POST">
+                   
+                    <div class="form-group">
+                        <textarea class="form-control" type="text" name="report[report]"
+                            placeholder="Write a report" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">Submit a qustion</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+  
+    <%- include("../partials/footer") %>

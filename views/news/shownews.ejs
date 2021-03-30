@@ -5,7 +5,7 @@
                 <div class="col-md-8">
                     <%if(cnews.length>0){%>
                         <% cnews.forEach((news)=>{%>
-                            
+                            <a href="/news/<%=news._id%>">
                             <div class="post">
                                 <div class="number">5</div>
                                 <div class="post-info">
@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-md-3">
                     <h3>categories</h3>
-                    <% let unews=results.news.map((news)=>{%>
+                    <% let unews=news.map((news)=>{%>
                         <% return news.categories %>
                             <%})%>
                                 <%let x=(unews)=> unews.filter((v,i) => unews.indexOf(v) === i)%>
@@ -75,7 +75,7 @@
                                  <div class="row mt-5">
                                      <div class="col-md-12">
                                           <h4>latest news</h4>
-                                         <%results.news.slice(0,5).forEach((news)=>{%>
+                                         <%news.slice(0,5).forEach((news)=>{%>
                                             <a href="/news/<%=news._id%>"><h6>*<%=news.heading%></h6></a>
                                          <%})%>
                                      </div>

@@ -153,21 +153,18 @@
                                             <%=qus.text%>
                                         </p>
                                         <%if(currentUser.role.includes('admin')){%>
-                                        <h1 class="float-right">
-                                            <a class="btn btn-xs btn-warning"
-                                                href="/experts/<%=expert._id %>/qustion/<%=qus._id %>/answer/new">Add
-                                                Answer</a>
-                                        </h1>
-                                        <%}%>
-                                        <%qus.answer.forEach(ans=>{%>
-                                            <h2>Anwer</h2>
-                                            <%=ans.text%>
-                                                <%})%>
-                                                    <%}%>
-
-
-
+                                            <h1 class="float-right">
+                                                <a class="btn btn-xs btn-warning"
+                                                    href="/experts/<%=expert._id %>/qustion/<%=qus._id %>/answer/new">Add
+                                                    Answer</a>
+                                            </h1>
+                                            <%}%>
+                                                <%qus.answer.forEach(ans=>{%>
+                                                    <h2>Anwer</h2>
+                                                    <%=ans.text%>
                                                         <%})%>
+                                                            <%}%>
+                                                                <%})%>
                             </div>
                         </div>
                     </div>
