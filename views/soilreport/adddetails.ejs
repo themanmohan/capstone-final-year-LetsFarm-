@@ -6,10 +6,12 @@
             <div style="width: 30%; margin: 25px auto;">
                 <form action="/soildetails" method="POST" enctype="multipart/form-data">
                     <label for="image">Upload Image</label>
-                    <input type="file" id="image" name="image" value="" required>
+                    <input   type="file" id="image" name="image"  required  <% if (currentUser && detail.some(function (detail) {return detail.author.id.equals(currentUser._id)})) { %>
+    disabled <% } %>>
             </div>
             <div class="form-group">
-                <button class="btn btn-primary btn-block">Submit detail</button>
+                <button class="btn btn-primary btn-block  <% if (currentUser && detail.some(function (detail) {return detail.author.id.equals(currentUser._id)})) { %>
+    d-none <% } %>">Submit detail</button>
             </div>
             </form>
 

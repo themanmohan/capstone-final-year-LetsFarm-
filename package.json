@@ -4,6 +4,7 @@
   "description": "This website give the information about farming product and msp and many other feature",
   "main": "index.js",
   "scripts": {
+    "start":"node app.js",
     "dev": "nodemon app.js"
   },
   "author": "Manmohan kumar",

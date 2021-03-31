@@ -20,21 +20,27 @@
             <th scope="row">1</th>
             <td><%=data.name%></td>
             <td><%=data.email%></td>
+            
             <td><img style="height: 50px; width: 100px;" class="img-responsive" src="data:image/<%=data.img.contentType%>;base64,
             	<%=data.img.data.toString('base64')%>"></td>
                 <td>
                     <a  class="btn btn-xs btn-warning <% if (currentUser && data.report.some(function (report) {return report.author.id.equals(currentUser._id)})) { %>
     disabled <% } %>"  href="/soildetails/<%=data._id %>/report/new">Add report</a> //
 
-    <a class="btn btn-xs btn-warning" href="/soildetails/<%=data._id %>/report/update">update report</a>
-
+  
 </td>
                 <td><form id="delete-form" style="display: inline-block;" action="/soildetails/<%=data._id %>/delete?_method=DELETE"
                     method="POST">
                     <button class="btn btn-xs btn-danger">Delete</button>
                 </form></td>
+                <td>
+                    <%data.report.forEach(report=>{%>
+                        <a class="btn btn-xs btn-warning" href="/soildetails/<%=data._id %>/report/<%=report._id %>/edit">update report</a>
+
+                            <%})%>
+                </td>
         </tr>
-       
+
     </tbody>
     <%})%>
 </table>
