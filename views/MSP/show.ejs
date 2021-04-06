@@ -1,0 +1,148 @@
+<%- include("../partials/header") %>
+<td>
+    <%if(currentUser.role.includes('admin')){%>
+        <div class="text-center">
+<a class="btn btn-xs btn-warning" href="/msp/new">Add MSP</a> 
+</div>
+<%}%>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 offset-md-1">
+            <canvas id="myChart1" width="400" height="400"></canvas>
+        </div>
+        <div class="col-md-4 offset-md-2">
+        <canvas id="myChart2" width="400" height="400"></canvas>
+        </div>
+    </div>
+    
+</div>
+
+ 
+
+    <script>
+      
+        const msp = '<%-filtermsp%>'
+        const product = '<%-filterproduct%>';
+       let newProduct = product.split(',');
+       let newmsp = msp.split(',');
+console.log(newmsp)
+        var ctx = document.getElementById('myChart1')
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: newProduct,
+                    datasets: [{
+                        label: 'msp in quntal',
+                        data: newmsp,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                           
+                        ],
+                        borderColor: [
+                              'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                            
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+             var ctx = document.getElementById('myChart2')
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: newProduct,
+                        datasets: [{
+                            label: 'msp in quntal',
+                            data: newmsp,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+    </script>
+
+
+<div id="dd">hjrjgfj</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">product</th>
+            <th scope="col">msp</th>
+            <th scope="col">Increase</th>
+            <th scope="col">action</th>
+            
+    </thead>
+    <tbody>
+        <%msp.forEach(msp=>{%>
+<tr>
+    
+    <td><%=msp.product%></td>
+    <td>
+        <%=msp.msp%>
+    </td>
+    <td>
+        <%=msp.increase%>
+    </td>
+    <td><%if(currentUser.role.includes('admin')){%>
+      
+        <a class="btn btn-xs btn-warning" href="/msp/<%=msp._id %>/edit">update MSP</a> //
+        <form id="delete-form" style="display: inline-block;" action="/msp/<%=msp._id %>/delete?_method=DELETE"
+            method="POST">
+            <button class="btn btn-xs btn-danger">Delete MSP</button>
+            </form>
+            <%}%>
+    </td>
+   
+</tr>
+        <%})%>
+        
+       
+        
+    </tbody>
+</table>
+
+
+
+
+<%- include("../partials/footer") %>

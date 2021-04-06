@@ -2,7 +2,7 @@ const express = require("express")
 const dbconnection = require("./Config/dbConnection")
 //route
 const AllIndiaRoute = require("./route/AllIndia")
-const AuthRoute=require("./route/User")
+const AuthRoute=require("./route/User/User")
 const ExpertRoute = require("./route/experts/experts")
 const ReviewsRoute = require("./route/experts/reviews")
 const QustionRoute = require("./route/experts/qustion")
@@ -10,6 +10,7 @@ const AnswerRoute = require("./route/experts/answer")
 const NewsRoute = require("./route/news/news")
 const SoildetailRoute = require("./route/soilreport/detail")
 const SoilReportRoute = require("./route/soilreport/report")
+const MSPRoute = require("./route/MSP/Allindia")
 const methodOverride = require("method-override")
 
 const passport = require('passport');
@@ -27,6 +28,7 @@ dbconnection()
 //serving static file
 app.use(express.static(__dirname + "/public"))
 
+app.use('/static', express.static('public'));
 // Express body parser
 app.use(express.urlencoded({
     extended: true
@@ -67,6 +69,7 @@ app.set("view engine", "ejs")
 app.use('/AllIndia', AllIndiaRoute)
 app.use('/users', AuthRoute) 
 app.use('/news', NewsRoute)
+app.use('/msp', MSPRoute)
 app.use('/experts', ExpertRoute)
 app.use('/soildetails', SoildetailRoute)
 app.use('/soildetails/:detail_id/report', SoilReportRoute)

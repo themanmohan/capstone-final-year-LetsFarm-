@@ -1,0 +1,25 @@
+<%- include("../partials/header") %>
+<%=msp%>
+    <div>
+        <h1>update msp of product <%=msp.product%></h1>
+        <form action="/msp/<%=msp._id %>?_method=PUT" method="POST">
+            <div>
+                <label for="name">product</label>
+                <input type="text" id="name" placeholder="Name" value="<%=msp.product%>" name="msp[product]" required>
+            </div>
+
+            <div>
+                <label for="msp">MSP</label>
+                <input type="number" id="name" placeholder="msp" value="<%=msp.msp%>" name="msp[msp]" required>
+            </div>
+            <div>
+                <label for="msp">Increament</label>
+                <input type="number" id="name"  value="<%=msp.increase%>" name="msp[increase]" required>
+            </div>
+            <div>
+                <button type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+
+<%- include("../partials/footer") %></div>

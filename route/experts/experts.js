@@ -116,7 +116,7 @@ router.post('/addexpert',isLoggedIn,authorize('admin'), upload.single('image'), 
 router.delete("/:expert_id/delete",isLoggedIn,authorize('admin'), function (req, res) {
     Expert.findById(req.params.expert_id, function (err, expert) {
         if (err) {
-            res.redirect("/AllIndia");
+            res.redirect("back");
         } else {
             // deletes all comments associated with the campground
             Qustion.remove({
@@ -141,7 +141,7 @@ router.delete("/:expert_id/delete",isLoggedIn,authorize('admin'), function (req,
                 //  delete the expert
                 expert.remove();
                 req.flash("success", "expert delete deleted successfully!");
-                res.redirect("/AllIndia");
+                res.redirect("back");
             });
             });
         }
