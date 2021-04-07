@@ -14,5 +14,32 @@
     
 </head>
 <body>
+        <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/University">YelpCamp</a>
+            </div>
+          
+                    <% if(!currentUser){ %>
+                        <li><a href="/users/login">Login</a></li>
+                        <li><a href="/users/register">Sign Up</a></li>
+                        <% } else { %>
+                           
+                                <ul class="dropdown-menu">
+                                
+                                    <li>
+                                        <a href="/users/notifications">View past notifications</a>
+                                    </li>
+                                
+                             
+                                </ul>
+                            </li>
+                            <li><a href="#">Signed In As <%= currentUser.name %></a></li>
+                            <li><a href="/users/logout">Logout</a></li>
+                            <% } %>
+              
+        </div>
+    </nav>
+
 
     <%- include('message.ejs') %>

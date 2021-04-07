@@ -15,6 +15,14 @@ var expertsSchema = new mongoose.Schema({
            ref:"Qustion"
        }
     ],
+    // author id and username fields
+    author: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
+    },
     reviews: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Review"

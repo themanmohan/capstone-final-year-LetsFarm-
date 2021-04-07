@@ -1,4 +1,8 @@
 <%- include('../partials/header.ejs') %>
+
+        
+       
+   
     <div class="container">
         <%if(!expert.length){%>
             no expert found
@@ -29,6 +33,7 @@
                                                 <%}%>
 
                                     </h4>
+                                    <h4><a href="/users/follow/<%= expert.author.id%>"><button class="btn btn-primary">Follow</button></a></h4>
                                     <h4><a>
                                             <%=expert.name%>
                                         </a></h4>
@@ -152,13 +157,6 @@
                                         <p>
                                             <%=qus.text%>
                                         </p>
-                                        <%if(currentUser.role.includes('admin')){%>
-                                            <h1 class="float-right">
-                                                <a class="btn btn-xs btn-warning"
-                                                    href="/experts/<%=expert._id %>/qustion/<%=qus._id %>/answer/new">Add
-                                                    Answer</a>
-                                            </h1>
-                                            <%}%>
                                                 <%qus.answer.forEach(ans=>{%>
                                                     <h2>Anwer</h2>
                                                     <%=ans.text%>

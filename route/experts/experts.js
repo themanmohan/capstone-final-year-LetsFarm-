@@ -70,6 +70,42 @@ router.get("/showexpert",isLoggedIn, function (req, res) {
     });
 });
 
+//@desc       show expert
+//@route     GET/experts/showexpert
+//@access    private
+router.get("/admindashboard", isLoggedIn,authorize('admin'), function (req, res) {
+
+    Expert.find().populate({
+        path: "reviews",
+        options: {
+            sort: {
+                createdAt: -1
+            }
+        }
+        // sorting the populated reviews array to show the latest first
+    }).populate({
+        path: "qustion",
+
+        options: {
+            sort: {
+                createdAt: -1
+            }
+        },
+        populate: {
+            path: 'answer'
+        }
+        // sorting the populated reviews array to show the latest first
+    }).exec(function (err, expert) {
+        if (err || !expert) {
+            req.flash("error", "some thing went wrong");
+            return res.redirect("back");
+        }
+        res.render('experts/adminDashboard', {
+            expert
+        });
+
+    });
+});
 
 //@desc      add expert
 //@route     GET/experts/addexpert
@@ -93,13 +129,14 @@ router.post('/addexpert',isLoggedIn,authorize('admin'), upload.single('image'), 
             contentType: 'image/png'
         }
     }
-    console.log(req.file.filename)
 
-    Expert.create(obj, (err, item) => {
+    Expert.create(obj, (err, expert) => {
         if (err) {
             console.log(err);
         } else {
-            item.save();
+             expert.author.id=req.user._id;
+             expert.author.username=req.user.name
+            expert.save();
             req.flash(
                 'success_msg',
                 'Expert created succesfully'

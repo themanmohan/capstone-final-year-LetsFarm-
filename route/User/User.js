@@ -4,6 +4,12 @@ const passport = require("passport")
 var router = express.Router();
 //model
 const User = require("../../model/User/User")
+const Expert = require("../../model/experts/expert")
+//middleware
+const {
+  authorize,
+  isLoggedIn
+} = require("../../middleware/auth")
 
 //@desc      login form
 //@route     GET/users/login
@@ -118,6 +124,43 @@ router.get('/logout', (req, res) => {
   req.logout();
   req.flash('success_msg', 'You are logged out');
   res.redirect('/users/login');
+});
+
+
+// follow user
+router.get('/follow/:user_id', isLoggedIn,  function (req, res) {
+  User.findById(req.params.user_id,(err,foundUser)=>{
+    if(err){
+      console.log(err)
+      req.flash('error_msg', err.message);
+    }
+      foundUser.followers.push(req.user._id)
+      foundUser.save()
+      req.flash('success_msg', 'Successfully followed !');
+      res.redirect("back")
+  })
+  
+});
+
+// view all notifications
+router.get('/notifications', isLoggedIn, async function (req, res) {
+  try {
+    let user = await User.findById(req.user._id).populate({
+      path: 'notifications',
+      options: {
+        sort: {
+          "_id": -1
+        }
+      }
+    }).exec();
+    let allNotifications = user.notifications;
+    res.render('notifications/index', {
+      allNotifications
+    });
+  } catch (err) {
+    req.flash('error', err.message);
+    res.redirect('back');
+  }
 });
 
 module.exports = router

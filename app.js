@@ -12,7 +12,7 @@ const SoildetailRoute = require("./route/soilreport/detail")
 const SoilReportRoute = require("./route/soilreport/report")
 const MSPRoute = require("./route/MSP/Allindia")
 const methodOverride = require("method-override")
-
+const User=require("./model/User/User")
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -54,14 +54,20 @@ app.use(passport.session());
 // Connect flash
 app.use(flash());
 
+
 // Global variables
-app.use(function (req, res, next) {
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
-    res.locals.error = req.flash('error');
-    res.locals.currentUser=req.user
+app.use( function (req, res, next) {
+    res.locals.currentUser = req.user;
+   
+   res.locals.success_msg = req.flash('success_msg');
+   res.locals.error_msg = req.flash('error_msg');
+   res.locals.error = req.flash('error');
+  
     next();
 });
+
+
+
 
 //settting view engine ejs
 app.set("view engine", "ejs")

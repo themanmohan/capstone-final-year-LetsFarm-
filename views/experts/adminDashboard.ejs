@@ -1,0 +1,58 @@
+<%- include("../partials/header") %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+<a class="btn btn-xs btn-warning  m-4" href="/experts/addexpert">
+  Add Expert</a>
+  <a class="btn btn-xs btn-warning m-4 " href="/experts/showexpert">
+    View Expert</a>
+    </div>
+    <div class="col-md-10">
+    
+  
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">name</th>
+      <th scope="col">qustion</th>
+      <th scope="col">upload answer</th>
+    </tr>
+  </thead>
+<%expert.forEach(expert=>{%>
+<%expert.qustion.forEach(qus=>{%>
+
+  
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td><%=qus.author.username%></td>
+        <td><div style="width: 500px;"><%=qus.text%></div></td>
+        <td> <a class="btn btn-xs btn-warning  <% if (currentUser && qus.answer.some(function (qus) {return qus.author.id.equals(currentUser._id)})) { %>
+    disabled <% } %>"  href="/experts/<%=expert._id %>/qustion/<%=qus._id %>/answer/new">Add
+        Answer</a>
+     
+      </td>
+        <td> 
+          <%qus.answer.forEach(ans=>{%>
+          <form id="delete-form" style="display: inline-block;" action="/experts/<%= expert._id %>/qustion/<%=qus._id %>/answer/<%=ans._id %>/delete?_method=DELETE"
+          method="POST">
+          <button class="btn btn-xs btn-danger">Delete</button>
+        </form>
+      <%})%>
+      </td> 
+      </tr>
+      
+     
+    </tbody>
+ 
+
+
+<%})%>
+<%})%>
+</table>
+  </div>
+  </div>
+  </div>
+<%- include("../partials/footer") %>
