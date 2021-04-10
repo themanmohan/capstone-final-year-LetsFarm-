@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="compass-icon"><img src="/icons/compass.svg" alt=""></div>
+    </header>
+    <div class="weather-title">
+      <h1>Simply Weather</h1>
+      <p>View the current weather for your city</p>
+    </div>
+    <form action="/weather" method="POST">
+      <input type="text" name="city" class="ghost-input" placeholder="Enter a city">
+    </form>
+
+    <div class="result">
+
+      <div class="icon-des">
+        <% if(icon !==null) {%>
+          <img class="icon" src="http://openweathermap.org/img/w/<%= icon %>.png" alt="">
+          <% } %>
+
+            <img class="icon" id="img" alt="">
+            <br />
+            <% if(des !==null) {%>
+              <h3>
+                <%= des %>
+              </h3>
+              <% } %>
+
+                <h3 id="des">
+                </h3>
+      </div>
+      <% if(temp !==null) {%>
+        <h3 class="temp">
+          Temp:- <%= temp %>
+        </h3>
+        <% } %>
+          <% if(temp==null) {%>
+            Temp:-
+            <% } %>
+              <h1 id="temp">
+
+              </h1>
+
+
+              <% if(wind !==null) {%>
+                <h3>
+                  Wind Speed:- <%= wind %>
+                </h3>
+                <% } %>
+                  <% if(wind==null) {%>
+                    Wind Speed:-
+                    <% } %>
+                      <h4 id="wind">
+                      </h4>
+
+
+                      <% if(city !==null) {%>
+                        <p class="city">
+                          Location:- <%= city %>
+
+                        </p>
+                        <% } %>
+                          <% if(city==null) {%>
+                            Location:-
+                            <% } %>
+                              <p id="city"></p>
+    </div>
+  </div>
+
+
+  <!-- fetching current location -->
+  <script>
+    console.log()
+    if (!'<%-city%>') {
+
+      window.navigator.geolocation.getCurrentPosition((postion) => {
+        let lat = postion.coords.latitude;
+        let log = postion.coords.longitude
+        fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${log}&appid=c52059e4c1174f868eb6a12a556dc7e5`)
+          .then(response => response.json())
+          .then(data => getData(data));
+      },
+        (error) => console.log(error)
+      )
+
+
+      const getData = (data) => {
+        const city = data.name;
+        const des = data.weather[0].description;
+        const icon = data.weather[0].icon;
+        const temp = data.main.temp;
+        const wind = data.wind.speed;
+        const cty = document.getElementById("city")
+        const desc = document.getElementById("des")
+        const img = document.getElementById("img")
+        const tem = document.getElementById("temp")
+        const winds = document.getElementById("wind")
+        cty.innerText = city
+        desc.innerText = des
+        tem.innerText = temp
+        winds.innerText = wind
+        img.src = `http://openweathermap.org/img/w/${icon}.png`
+        console.log(data, wind)
+      }
+    }
+
+  </script>
+</body>
+
+</html>
