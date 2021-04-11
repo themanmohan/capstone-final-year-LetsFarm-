@@ -1,0 +1,53 @@
+<%=cropDetail.product%>
+    <%- include("../../partials/header") %>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <%- include("../../partials/cropSideBar") %>
+                </div>
+                <div class="col-md-9">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">product</th>
+                                <th scope="col">msp</th>
+                                <th scope="col">Increase</th>
+                                <%if(currentUser.role.includes('admin')){%>
+                                    <th scope="col">action</th>
+                                    <%}%>
+
+                        </thead>
+                        <tbody>
+                            <%cropDetail.forEach(crop=>{%>
+                                <tr>
+
+                                    <td>
+                                        <%=crop.product%>
+                                    </td>
+                                    <td>
+                                        <%=crop.quantity%>
+                                    </td>
+                                    <td>
+                                        <%=crop.increase%>
+                                    </td>
+                                    <%if(currentUser.role.includes('admin')){%>
+                                        <td>
+                                            <a class="btn btn-xs btn-warning"
+                                                href="/maydhyapardeshcropdetail/<%=crop._id %>/edit">update
+                                                MSP</a> //
+                                            <form id="delete-form" style="display: inline-block;"
+                                                action="/maydhyapardeshcropdetail/<%=crop._id %>/delete?_method=DELETE"
+                                                method="POST">
+                                                <button class="btn btn-xs btn-danger">Delete </button>
+                                            </form>
+                                        </td>
+                                        <%}%>
+                                </tr>
+                                <%})%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <%- include("../../partials/footer") %>

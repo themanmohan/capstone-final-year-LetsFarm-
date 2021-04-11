@@ -73,6 +73,18 @@ app.use( function (req, res, next) {
 //settting view engine ejs
 app.set("view engine", "ejs")
 
+
+
+app.use('/biharcropdetail', require("./route/cropDetail/Bihar"))
+app.use('/andhrapardeshcropdetail', require("./route/cropDetail/AndhraPardesh"))
+app.use('/karnatakacropdetail', require("./route/cropDetail/Karnataka"))
+app.use('/maydhyapardeshcropdetail', require("./route/cropDetail/MaydhyaPardesh"))
+app.use('/gujaratcropdetail', require("./route/cropDetail/Gujarat"))
+app.use('/assamcropdetail', require("./route/cropDetail/Assam"))
+app.use('/punjabcropdetail', require("./route/cropDetail/Punjab"))
+app.use('/upcropdetail', require("./route/cropDetail/UP"))
+app.use('/haryanacropdetail', require("./route/cropDetail/Haryana"))
+app.use('/westbengalcropdetail', require("./route/cropDetail/WestBengal"))
 app.use('/AllIndia', AllIndiaRoute)
 app.use('/users', AuthRoute) 
 app.use('/news', NewsRoute)
@@ -89,6 +101,6 @@ app.use('/experts/:expert_id/qustion/:qustion_id/answer', AnswerRoute)
 
 
 const PORT = process.env.PORT || 6000
-app.listen(PORT, (err, data) => {
+app.listen(2000, (err, data) => {
     console.log("running at 5000")
 })

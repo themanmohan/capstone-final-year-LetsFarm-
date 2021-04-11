@@ -1,0 +1,25 @@
+<%- include("../../partials/header") %>
+    <h1>add detail and prodcut</h1>
+    <div style="width: 30%; margin: 25px auto;">
+        <form action="/karnatakacropdetail" method="POST">
+            <div>
+                <label for="name">product</label>
+                <input type="text" id="name" placeholder="Name" value="" name="cropdetail[product]" required>
+            </div>
+
+            <div>
+                <label for="msp">MSP</label>
+                <input type="number" id="name" placeholder="quantity" value="" name="cropdetail[quantity]" required>
+            </div>
+            <div>
+                <label for="msp">Increament</label>
+                <input type="number" id="name" value="" name="cropdetail[increase]" required>
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    </div>
+
+    <%- include("../../partials/footer") %>
