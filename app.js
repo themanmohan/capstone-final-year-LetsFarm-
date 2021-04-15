@@ -101,6 +101,6 @@ app.use('/experts/:expert_id/qustion/:qustion_id/answer', AnswerRoute)
 
 
 const PORT = process.env.PORT || 6000
-app.listen(2000, (err, data) => {
+app.listen(PORT, (err, data) => {
     console.log("running at 5000")
 })

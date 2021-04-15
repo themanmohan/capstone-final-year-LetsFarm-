@@ -1,19 +1,19 @@
 <%- include("../../partials/header") %>
-    <h1>add detail and prodcut</h1>
+    <h1>edit detail and prodcut</h1>
     <div style="width: 30%; margin: 25px auto;">
-        <form action="/assamcropdetail" method="POST">
+        <form action="/biharcropdetail/<%=foundData._id%>?_method=PATCH" method="POST">
             <div>
                 <label for="name">product</label>
-                <input type="text" id="name" placeholder="Name" value="" name="cropdetail[product]" required>
+                <input type="text" id="name" placeholder="" value="<%=foundData.product%>" name="cropdetail[product]" required>
             </div>
 
             <div>
                 <label for="msp">MSP</label>
-                <input type="number" id="name" placeholder="quantity" value="" name="cropdetail[quantity]" required>
+                <input type="number" id="name" placeholder="quantity" value="<%=foundData.quantity%>" name="cropdetail[quantity]" required>
             </div>
             <div>
                 <label for="msp">Increament</label>
-                <input type="number" id="name" value="" name="cropdetail[increase]" >
+                <input type="number" id="name" value="<%=foundData._increase%>" name="cropdetail[increase]" >
             </div>
             <div>
                 <button type="submit">Submit</button>

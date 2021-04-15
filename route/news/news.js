@@ -47,7 +47,7 @@ router.get('/',isLoggedIn, (req, res) => {
  
     
     News.find().limit(limit).skip(startIndex).sort({
-        createdAt: -1
+        createdAt: 1
     }).exec((err, news) => {
         if (err) {
             console.log(err)

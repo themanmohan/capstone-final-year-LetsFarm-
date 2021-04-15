@@ -2,10 +2,14 @@
     <%- include("../../partials/header") %>
         <div class="container">
             <div class="row">
+                
                 <div class="col-md-3">
                     <%- include("../../partials/cropSideBar") %>
                 </div>
                 <div class="col-md-9">
+                    <%if(currentUser.role.includes('admin')){%>
+                        <a href="/biharcropdetail/new" class="btn btn-success text-center m-5">Add crop detail for bihar</a>
+                        <%}%>
                     <table class="table">
                         <thead>
                             <tr>
@@ -20,7 +24,6 @@
                         <tbody>
                             <%cropDetail.forEach(crop=>{%>
                                 <tr>
-
                                     <td>
                                         <%=crop.product%>
                                     </td>
