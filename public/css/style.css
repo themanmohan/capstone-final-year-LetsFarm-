@@ -1,27 +1,21 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.6;
-}
 
-.container {
-    background: #fff;
-    max-width: 62rem;
-    margin: 4rem auto;
- border: green solid 2px;
+
+.wcontainer {
+  height: 80vh;
+  margin-top: 30px;
+  margin-bottom: 30px;
+box-shadow: 4px 4px 4px 10px rgba(34, 7, 85, 0.2);
+ padding: 0;
 
 }
 
 header {
-    background: rgb(23, 179, 23);
+    background: #1c0744;
     height: 3rem;
     width: 100%;
     position: relative;
+    padding: 0;
 }
 
 header .compass-icon {
@@ -91,3 +85,4 @@ form input {
 .result .city {
     font-size: 1rem;
 }
+

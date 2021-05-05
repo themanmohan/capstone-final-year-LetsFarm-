@@ -23,9 +23,8 @@ router.get("/", function (req, res) {
         }
      // sorting the populated reviews array to show the latest first
     }).exec(function (err, expert) {
-        console.log(expert)
         if (err || !expert) {
-            req.flash("error", "something went wrong");
+            req.flash("error_msg", "something went wrong");
             return res.redirect("back");
         }
         res.render("experts/showallreviews", {
@@ -41,7 +40,7 @@ router.get("/", function (req, res) {
 router.get("/new", isLoggedIn, function (req, res) {
     Expert.findById(req.params.expert_id, function (err, data) {
         if (err) {
-            req.flash("error", err.message);
+            req.flash("error_msg", err.message);
             return res.redirect("back");
         }
         res.render("experts/addreviews", {
@@ -60,15 +59,15 @@ router.post("/", isLoggedIn, function (req, res) {
     
     Expert.findById(req.params.expert_id).populate("reviews").exec(function (err, expert) {
         if (err) {
-            req.flash("error", err.message);
+            req.flash("error_msg", err.message);
             return res.redirect("back");
         }
         Review.create(req.body.review, function (err, review) {
             if (err) {
-                req.flash("error", err.message);
+                req.flash("error_msg", err.message);
                 return res.redirect("back");
             }
-            console.log(req.user)
+           
             //add author username/id and associated expert to the review
             review.author.id = req.user._id;
             review.author.username = req.user.name;
@@ -80,7 +79,7 @@ router.post("/", isLoggedIn, function (req, res) {
             expert.rating = calculateAverage(expert.reviews);
             //save expert
             expert.save();
-            req.flash("success", "Your review has been successfully added.");
+            req.flash("success_msg", "Your review has been successfully added.");
             res.redirect('/experts/showexpert' );
         });
     });
@@ -92,7 +91,7 @@ router.post("/", isLoggedIn, function (req, res) {
 router.get("/:review_id/edit", isLoggedIn, function (req, res) {
     Review.findById(req.params.review_id, function (err, foundReview) {
         if (err) {
-            req.flash("error", err.message);
+            req.flash("error_msg", err.message);
             return res.redirect("back");
         }
         res.render("experts/editreviews", {
@@ -110,19 +109,19 @@ router.put("/:review_id", isLoggedIn, function (req, res) {
         new: true
     }, function (err, updatedReview) {
         if (err) {
-            req.flash("error", err.message);
+            req.flash("error_msg", err.message);
             return res.redirect("back");
         }
         Expert.findById(req.params.expert_id).populate("reviews").exec(function (err, expert) {
             if (err) {
-                req.flash("error", err.message);
+                req.flash("error_msg", err.message);
                 return res.redirect("back");
             }
             // recalculate expert average
             expert.rating = calculateAverage(expert.reviews);
             //save changes
             expert.save();
-            req.flash("success", "Your review was successfully edited.");
+            req.flash("success_msg", "Your review was successfully edited.");
             res.redirect('/experts/showexpert');
         });
     });
@@ -134,7 +133,7 @@ router.put("/:review_id", isLoggedIn, function (req, res) {
 router.delete("/:review_id", isLoggedIn, function (req, res) {
     Review.findByIdAndRemove(req.params.review_id, function (err) {
         if (err) {
-            req.flash("error", err.message);
+            req.flash("error_msg", err.message);
             return res.redirect("back");
         }
         Expert.findByIdAndUpdate(req.params.expert_id, {
@@ -145,14 +144,14 @@ router.delete("/:review_id", isLoggedIn, function (req, res) {
             new: true
         }).populate("reviews").exec(function (err, expert) {
             if (err) {
-                req.flash("error", err.message);
+                req.flash("error_msg", err.message);
                 return res.redirect("back");
             }
             // recalculate expert average
             expert.rating = calculateAverage(expert.reviews);
             //save changes
             expert.save();
-            req.flash("success", "Your review was deleted successfully.");
+            req.flash("success_msg", "Your review was deleted successfully.");
             res.redirect("/experts/showexpert");
         });
     });

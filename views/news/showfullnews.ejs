@@ -1,22 +1,31 @@
 <%- include("../partials/header") %>
-
+<main class="d-flex align-items-center  py-3 py-md-0" style="margin: 30px;  height: 70vh;">
+    <div class="container">
+        <div class="card login-card">
+            <div class="row no-gutters">
 <div class="container">
     <div id="posts-container">
         <div class="row">
             <div class="col-md-12">
                 
                     <div class="post">
-                        <div class="number">5</div>
+                      
                         <div class="post-info">
-                            <div class="post-title">
+                            <div class="post-title p-3">
                               <h3> <%=news.heading%></h3>
                             </div>
-                            <p class="post-body">
+                            <p class="post-body p-3">
                                 <%=news.text%>
                             </p>
+                            <a href="/news?page=1&limit=5"><button class="btn mb-5 ml-5" style="background-color:#440a67 ; color: wheat;">Back</button></a>
                         </div>
             </div>
         </div>
     </div>
 </div>
+</div>
+</div>
+</div>
+</div>
+</main>
 <%- include("../partials/footer") %>

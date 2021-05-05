@@ -1,0 +1,39 @@
+.container1 {
+   
+    margin-top: 80px;
+   
+}
+
+.container1 img{
+    background-color:rgb(211, 201, 182);
+    height: 300px;
+    width: 300px;
+    margin-left: 40px;
+}
+
+.caption{
+     margin-left: 40px;
+}
+
+#qustion{
+    background-color:
+    rgb(235, 240, 235);
+    margin-left: 50px;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 40px;
+    text-align: center;
+    
+}
+#answer{
+     background-color:rgb(252, 250, 246);
+     margin-left: 130px;
+      padding: 10px;
+      margin-top: 20px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      padding: 20px;
+       text-align: center;
+}

@@ -6,40 +6,67 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Smart Farming</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <link rel="stylesheet" href="/css/login.css">
+       
+        <link href="css/small-business.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/style.css">
     </head>
     
+    
+    
     <body>
-        <!-- <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/University">YelpCamp</a>
+    
+    
+        <nav class="navbar navbar-expand-lg  fixed-top" style="background-color:#440a67;">
+            <div class="container">
+                <a class="navbar-brand smart-nav" href="/">Let's Farm</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link smart-nav" href="#">Our Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <%if(currentUser){%>
+                            <%if(currentUser.role.includes('admin')){%>
+                                <li class="nav-item">
+                                    <a class="nav-link smart-nav" href="/experts/admindashboard">DashBoard For Qus</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link smart-nav" href="/soildetails/admindashboard">DashBoard For
+                                        SoilDetail</a>
+                                </li>
+                                <%}%>
+                                    <%}%>
+    
+    
+    
+                                        <%if(!currentUser){%>
+                                            <li class="nav-item">
+                                                <a class="nav-link smart-nav" href="/users/register">Register </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link smart-nav" href="/users/login">Login</a>
+                                            </li>
+                                            <%}else{%>
+                                                <li class="nav-item">
+                                                    <a class="nav-link smart-nav" href="/users/logout">logout</a>
+                                                </li>
+                                                <%}%>
+                    </ul>
+                </div>
             </div>
-          
-                    <% if(!currentUser){ %>
-                        <li><a href="/users/login">Login</a></li>
-                        <li><a href="/users/register">Sign Up</a></li>
-                        <% } else { %>
-                           
-                                <ul class="dropdown-menu">
-                                
-                                    <li>
-                                        <a href="/users/notifications">View past notifications</a>
-                                    </li>
-                                
-                             
-                                </ul>
-                            </li>
-                            <li><a href="#">Signed In As <%= currentUser.name %></a></li>
-                            <li><a href="/users/logout">Logout</a></li>
-                            <% } %>
-              
-        </div>
-    </nav> -->
+        </nav>
 
+        
 
     

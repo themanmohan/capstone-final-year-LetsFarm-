@@ -1,12 +1,12 @@
 <%=cropDetail.product%>
     <%- include("../../partials/header") %>
-        <div class="container">
+        <div class=" mt-5">
             <div class="row">
                
-                <div class="col-md-3">
+                <div class="col-md-3" style="background-color: rgb(238, 236, 232);">
                     <%- include("../../partials/cropSideBar") %>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-9" style="background-color: rgb(179, 177, 174);">
                     <%if(currentUser.role.includes('admin')){%>
                         <a href="/assamcropdetail/new" class="btn btn-success text-center m-5">Add crop detail for
                             Assam</a>
@@ -14,9 +14,9 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">product</th>
-                                <th scope="col">msp</th>
-                                <th scope="col">Increase</th>
+                                <th scope="col">product Name</th>
+                                <th scope="col">quantity(In Quintal)</th>
+                                <th scope="col">Increase (In Quintal)</th>
                                 <%if(currentUser.role.includes('admin')){%>
                                     <th scope="col">action</th>
                                     <%}%>
@@ -39,7 +39,7 @@
                                         <td>
                                             <a class="btn btn-xs btn-warning"
                                                 href="/assamcropdetail/<%=crop._id %>/edit">update
-                                                MSP</a> //
+                                                Detail</a> //
                                             <form id="delete-form" style="display: inline-block;"
                                                 action="/assamcropdetail/<%=crop._id %>/delete?_method=DELETE" method="POST">
                                                 <button class="btn btn-xs btn-danger">Delete </button>

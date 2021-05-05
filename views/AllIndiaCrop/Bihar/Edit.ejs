@@ -1,25 +1,40 @@
-<%- include("../../partials/header") %>
-    <h1>edit detail and prodcut</h1>
-    <div style="width: 30%; margin: 25px auto;">
-        <form action="/biharcropdetail/<%=foundData._id%>?_method=PATCH" method="POST">
-            <div>
-                <label for="name">product</label>
-                <input type="text" id="name" placeholder="" value="<%=foundData.product%>" name="cropdetail[product]" required>
-            </div>
 
-            <div>
-                <label for="msp">MSP</label>
-                <input type="number" id="name" placeholder="quantity" value="<%=foundData.quantity%>" name="cropdetail[quantity]" required>
-            </div>
-            <div>
-                <label for="msp">Increament</label>
-                <input type="number" id="name" value="<%=foundData._increase%>" name="cropdetail[increase]" >
-            </div>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
-        </form>
-    </div>
-    </div>
 
-    <%- include("../../partials/footer") %>
+    <%- include("../../partials/header") %>
+        <main class="d-flex align-items-center min-vh-100 py-3 py-md-0 mt-5">
+            <div class="container ">
+                <div class="card news-card">
+                    <div class="row no-gutters">
+        
+                        <div class="col-md-10 offset-md-1">
+                            <div class="card-body">
+        
+                                <h3 style="text-align: center;">Update Detail</h3>
+                                <h3 style="text-align: center;">Bihar </h3>
+                                <form action="/biharcropdetail/<%=foundData._id%>?_method=PATCH" method="POST">
+                                    <div class="form-group">
+                                        <label for="name">product Name</label>
+                                        <input type="text" id="name" placeholder="" class="form-control"
+                                            value="<%=foundData.product%>" name="cropdetail[product]" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="quantity">quantity(In Quintal)</label>
+                                        <input type="number" id="name" placeholder="quantity" class="form-control"
+                                            value="<%=foundData.quantity%>" name="cropdetail[quantity]" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Increament">Increament</label>
+                                        <input type="number" id="name" value="<%=foundData.increase%>" class="form-control"
+                                            name="cropdetail[increase]">
+                                    </div>
+                                    <button type="submit" class="login-button">Submit</button>
+                                </form>
+    
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </main>
+    
+        <%- include("../../partials/footer") %>

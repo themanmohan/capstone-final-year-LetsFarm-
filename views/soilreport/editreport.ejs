@@ -1,24 +1,45 @@
 
-
 <%- include("../partials/header") %>
-    <div class="container">
-        <div class="row">
-            <h1 style="text-align: center">update report of soil detail of user: <%= detail.name %>
-            </h1>
-            <div style="width: 30%; margin: 25px auto;">
-                <form action="/soildetails/<%= detail._id %>/report/<%= report._id %>?_method=PUT" method="POST">
-
-                    <div class="form-group">
-                        <textarea class="form-control"  type="text" name="report[report]" placeholder="Write a report"
-                            rows="5"><%= report.report %></textarea>
+    <main class="d-flex align-items-center min-vh-100 py-3 py-md-0 mt-5">
+        
+        <div class="container ">
+            <div class="container ">
+                <div class="row mt-3">
+                    <div class="col-md-8 offset-md-2">
+                        <%- include("../partials/message") %>
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary btn-block">Submit a report</button>
-                    </div>
-                </form>
+                </div>
+            </div>
+            <div class="card news-card">
+                <div class="row no-gutters">
+                    
+                    <div class="col-md-10 offset-md-1">
+                        <div class="card-body">
+                            <div class="brand-wrapper">
+                              
+                            </div>
+<h3 style="text-align: center">update report of soil detail of user: <span style="color: red;"><%= detail.name %></span></h3>
+                            <div style="align-items: center;">
+                                <form action="/soildetails/<%= detail._id %>/report/<%= report._id %>?_method=PUT" method="POST">
+                                   
 
+                                    <div class="form-group">
+                                        
+                                        <textarea class="form-control" type="text" name="report[report]"
+                                            placeholder="Some details on your news" rows="20"><%= report.report %></textarea>
+                                    </div>
+                                  
+                                    <div class="form-group">
+                                        <button class="login-button">Update Report </button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <%- include("../partials/footer") %>

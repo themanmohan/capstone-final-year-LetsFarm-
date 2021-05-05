@@ -1,25 +1,43 @@
+
+
 <%- include("../partials/header") %>
-        <h1>add msp and prodcut</h1>
-        <div style="width: 30%; margin: 25px auto;">
-        <form action="/msp" method="POST" >
-            <div>
-                <label for="name">product</label>
-                <input type="text" id="name" placeholder="Name" value="" name="msp[product]" required>
-            </div>
+    <main class="d-flex align-items-center min-vh-100 py-3 py-md-0 mt-5">
+        <div class="container ">
+            <div class="card news-card">
+                <div class="row no-gutters">
 
-            <div>
-                <label for="msp">MSP</label>
-                <input type="number" id="name" placeholder="msp" value="" name="msp[msp]" required>
+                    <div class="col-md-10 offset-md-1">
+                        <div class="card-body">
+                            
+                            <h3 style="text-align: center">Add MSP</h3>
+                            <div style="align-items: center;">
+                            <form action="/msp" method="POST">
+
+                                        <label for="name">product</label>
+                                        <input type="text" class="form-control" id="name" placeholder="Name" value="" name="msp[product]" required>
+
+                                        <label for="msp">MSP (In Rupess)</label>
+                                        <input type="number" class="form-control" id="name" placeholder="msp" value="" name="msp[msp]" required>
+                                   
+                                        <label for="msp">Increament (In Rupess)</label>
+                                        <input type="number" class="form-control" id="name" value="" name="msp[increase]" required>
+
+                                        <div class="form-group">
+
+                                        
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button class="login-button">Add MSP </button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label for="msp">Increament</label>
-                <input type="number" id="name"  value="" name="msp[increase]" required>
-            </div>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
-        </form>
         </div>
-    </div>
+    </main>
 
-<%- include("../partials/footer") %>
+    <%- include("../partials/footer") %>

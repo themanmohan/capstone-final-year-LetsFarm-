@@ -1,22 +1,38 @@
-<%- include("../partials/header") %>
-    <div class="container">
-        <div class="row">
-            <h1 style="text-align: center">New Review:>
-            </h1>
-            <div style="width: 30%; margin: 25px auto;">
-                <form action="/experts/<%= expert_id %>/qustion/<%= qustion_id %>/answer" method="POST">
-                    <div class="form-group">
-                        <label for="rating">Leave a rating:</label>
+
+
+    <%- include("../partials/header") %>
+        <main class="d-flex align-items-center min-vh-100 py-3 py-md-0 mt-5">
+            <div class="container ">
+                <div class="card news-card">
+                    <div class="row no-gutters">
+    
+                        <div class="col-md-10 offset-md-1">
+                            <div class="card-body">
+                                <div class="brand-wrapper">
+    
+                                </div>
+                                <h3 style="text-align: center">Upload Answer</h3>
+                                <div style="align-items: center;">
+                                    <form action="/experts/<%= expert_id %>/qustion/<%= qustion_id %>/answer" method="POST">
+    
+    
+                                        <div class="form-group">
+    
+                                            <textarea class="form-control" type="text" name="answer[text]"
+                                                placeholder="Write a report" rows="20"></textarea>
+                                        </div>
+    
+                                        <div class="form-group">
+                                            <button class="login-button">Upload Answer </button>
+                                        </div>
+                                    </form>
+    
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <textarea class="form-control" type="text" name="answer[text]"
-                            placeholder="Write a qustion for this expert..." rows="5"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary btn-block">Submit a Answer</button>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
-    <%- include("../partials/footer") %>
+        </main>
+    
+        <%- include("../partials/footer") %>

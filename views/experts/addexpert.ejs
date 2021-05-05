@@ -1,39 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Uploading</title>
-</head>
 
-<body>
-    <h1>To Upload Image on mongoDB</h1>
-    <hr>
-    <div>
-        <form action="/experts/addexpert" method="POST" enctype="multipart/form-data">
-            <div>
-                <label for="name">Image Title</label>
-                <input type="text" id="name" placeholder="Name" value="" name="name" required>
+<%- include("../partials/header") %>
+    <main class="d-flex align-items-center min-vh-100 py-3 py-md-0 mt-5">
+        <div class="container ">
+            <div class="card news-card">
+                <div class="row no-gutters">
+                    <div class="col-md-5">
+                        <img src="/images/news.jpg" alt="login" class="login-card-img">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <div class="brand-wrapper">
+                                <img src="/images/newstop.png" alt="logo" class="logo">
+                            </div>
+
+                            <div style="align-items: center;">
+                            <form action="/experts/addexpert" method="POST" enctype="multipart/form-data">
+                                        <label for="name">Name</label>
+                                        <input type="text" id="name"  style="width:100%"  class="form-control" placeholder="Name" value="" name="name" required>
+                                         
+                                        <label for="name">Qualification</label>
+                                        <input type="text" style="width:100%"  class="form-control"  id="name" placeholder="Name" value="" name="qualification" required>
+                                    
+                                        <label for="image">Upload Image</label>
+                                        <input type="file" style="width:100%"  class="form-control" id="image" name="image" value="" required>
+
+                                        <div class="form-group">
+                                        <label for="description">Description</label>
+                                        
+                                            <textarea id="desc" class="form-control"  type="text"  name="desc" value=""  rows="6"   placeholder="Some details on your news" rows="10" required>
+                                            				</textarea>
+                                    </div>
+                                  
+                                    <div class="form-group">
+                                        <button class="login-button">Add  Expert</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label for="desc">Image Description</label>
-                <textarea id="desc" name="pesc" value="" rows="2" placeholder="Description" required>
-				</textarea>
-            </div>
-            <div>
-                <label for="image">Upload Image</label>
-                <input type="file" id="image" name="image" value="" required>
-            </div>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
-        </form>
-    </div>
+        </div>
+    </main>
 
-    <hr>
-
-  
-</body>
-
-</html>
+    <%- include("../partials/footer") %>

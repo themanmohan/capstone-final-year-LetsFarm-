@@ -1,17 +1,19 @@
 <%- include("../partials/header") %>
 <td>
+   
+    
+<div class="container" style="margin-top: 70px;">
     <%if(currentUser.role.includes('admin')){%>
         <div class="text-center">
-<a class="btn btn-xs btn-warning" href="/msp/new">Add MSP</a> 
-</div>
-<%}%>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4 offset-md-1">
-            <canvas id="myChart1" width="400" height="400"></canvas>
+            <a class="btn btn-xs btn-warning" href="/msp/new">Add MSP</a>
         </div>
-        <div class="col-md-4 offset-md-2">
-        <canvas id="myChart2" width="400" height="400"></canvas>
+        <%}%>
+    <div class="row mt-5">
+        <div class="col-md-3 offset-md-2">
+            <canvas id="myChart1" width="200" height="200"></canvas>
+        </div>
+        <div class="col-md-3 offset-md-1">
+        <canvas id="myChart2" width="200" height="200"></canvas>
         </div>
     </div>
     
@@ -28,7 +30,7 @@
 console.log(newmsp)
         var ctx = document.getElementById('myChart1')
             var myChart = new Chart(ctx, {
-                type: 'line',
+                type: 'pie',
                 data: {
                     labels: newProduct,
                     datasets: [{
@@ -103,47 +105,62 @@ console.log(newmsp)
     </script>
 
 
-<div id="dd">hjrjgfj</div>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">product</th>
-            <th scope="col">msp</th>
-            <th scope="col">Increase</th>
-            <%if(currentUser.role.includes('admin')){%>
-            <th scope="col">action</th>
-            <%}%>
+<main class="d-flex align-items-center  py-3 py-md-0" style="margin: 30px;" >
+    <div class="container" >
+        <div class="card login-card">
+            <div class="row no-gutters">
+<div class="container" style="padding-top: 40px ;">
+    <div class="row">
+        <div class="col-md-12 offset-md-1">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th scope="col">product</th>
+                        <th scope="col">msp(In Rupess)</th>
+                        <th scope="col">Increase(In Rupess)</th>
+                        <%if(currentUser.role.includes('admin')){%>
+                            <th scope="col">action</th>
+                            <%}%>
             
-    </thead>
-    <tbody>
-        <%msp.forEach(msp=>{%>
-<tr>
-    
-    <td><%=msp.product%></td>
-    <td>
-        <%=msp.msp%>
-    </td>
-    <td>
-        <%=msp.increase%>
-    </td>
-    <%if(currentUser.role.includes('admin')){%>
-    <td>
-        <a class="btn btn-xs btn-warning" href="/msp/<%=msp._id %>/edit">update MSP</a> //
-        <form id="delete-form" style="display: inline-block;" action="/msp/<%=msp._id %>/delete?_method=DELETE"
-            method="POST">
-            <button class="btn btn-xs btn-danger">Delete MSP</button>
-            </form>
-            </td>
-            <%}%>
-    
-   
-</tr>
-        <%})%>
-        
-       
-        
-    </tbody>
-</table>
+                </thead>
+                <tbody>
+                    <%msp.forEach(msp=>{%>
+                        <tr>
+            
+                            <td>
+                                <%=msp.product%>
+                            </td>
+                            <td>
+                                <%=msp.msp%>
+                            </td>
+                            <td>
+                                <%=msp.increase%>
+                            </td>
+                            <%if(currentUser.role.includes('admin')){%>
+                                <td>
+                                    <a class="btn btn-xs btn-warning" href="/msp/<%=msp._id %>/edit">update MSP</a> //
+                                    <form id="delete-form" style="display: inline-block;"
+                                        action="/msp/<%=msp._id %>/delete?_method=DELETE" method="POST">
+                                        <button class="btn btn-xs btn-danger">Delete MSP</button>
+                                    </form>
+                                </td>
+                                <%}%>
+            
+            
+                        </tr>
+                        <%})%>
+            
+            
+            
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</main>
 
 
 

@@ -1,78 +1,61 @@
 <%- include("../partials/header") %>
     <link rel="stylesheet" href="/css/news.css">
-
+<div class="container-fluid mt-5" >
     <div class="row">
         <div class="col-md-8 offset-md-1">
             <%- include('../partials/message.ejs') %>
-            <div class="courses-container">
-                <%if(cnews.length>0){%>
-                    <% cnews.forEach((news)=>{%>
-                        <div class="course">
-                            <div class="course-preview">
-                                <h6>News</h6>
-                                <h4>
-                                    <%=news.heading%>
-                                </h4>
-                                <a href="/news/<%=news._id%>">Read More<i class="fas fa-chevron-right"></i></a>
-                            </div>
-                            <div class="course-info">
-                                <div class="progress-container">
-
+                <div class="courses-container">
+                    <%if(cnews.length>0){%>
+                        <% cnews.forEach((news)=>{%>
+                            <div class="course">
+                                <div class="course-preview">
+                                    <h6>News</h6>
+                                    <h4>
+                                        <%=news.heading%>
+                                    </h4>
+                                    <a href="/news/<%=news._id%>">Read More<i class="fas fa-chevron-right"></i></a>
                                 </div>
-
-                                <h5>
-                                    <%=news.text.slice(0, 500)%>
-                                </h5>
-                                <a href="/news/<%=news._id%>"><button class="btn">Read More</button></a>
+                                <div class="course-info">
+                                    <div class="progress-container">
+                                    </div>
+                                    <h5>
+                                        <%=news.text.slice(0, 500)%>
+                                    </h5>
+                                    <a href="/news/<%=news._id%>"><button class="btn">Read More</button></a>
+                                </div>
                             </div>
-                        </div>
-                        <%})%>
-                            <%}%>
-                                <%if(cnews.length===0){%>
-                                    <% results.news.forEach((news)=>{%>
-                                        <div class="course">
-                                            <div class="course-preview">
-                                                <h6>News</h6>
-                                                <h4>
-                                                    <%=news.heading%>
-                                                </h4>
-                                                <a href="/news/<%=news._id%>">Read More<i
-                                                        class="fas fa-chevron-right"></i></a>
-                                            </div>
-                                            <div class="course-info">
-                                                <div class="progress-container">
+                            <%})%>
+                                <%}%>
+                                    <%if(cnews.length===0){%>
+                                        <% results.news.forEach((news)=>{%>
+                                            <div class="course">
+                                                <div class="course-preview">
+                                                    <h6>News</h6>
+                                                    <h4>
+                                                        <%=news.heading%>
+                                                    </h4>
+                                                    <a href="/news/<%=news._id%>">Read More<i
+                                                            class="fas fa-chevron-right"></i></a>
                                                 </div>
-                                                <h5>
-                                                    <%=news.text.slice(0, 300)%>
-                                                </h5>
-                                                <a href="/news/<%=news._id%>"><button class="btn">Read More</button></a>
+                                                <div class="course-info">
+                                                    <div class="progress-container">
+                                                    </div>
+                                                    <h5>
+                                                        <%=news.text.slice(0, 300)%>
+                                                    </h5>
+                                                    <a href="/news/<%=news._id%>"><button class="btn">Read
+                                                            More</button></a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <%})%>
-                                            <%}%>
-            </div>
-        </div>
-        <div class="col-md-2 offset-md-1">
-
-            <div class="floating-text">
-                We are <a href="news">News</a>
-            </div>
-            <div class="card" style="width: 18rem; height:15rem;  margin-top: 20px;">
-                <div class="card-header" style="font-weight: bold; letter-spacing:3px; text-transform: uppercase;">
-                    Featured
+                                            <%})%>
+                                                <%}%>
                 </div>
-                <%news.slice(0,2).forEach((news)=>{%>
-                    <ul class="list-group list-group-flush">
-                        <a href="/news/<%=news._id%>">
-                            <li class="list-group-item">
-                                <%=news.heading%>
-                            </li>
-                        </a>
+        </div>
+        <div class="col-md-2 ">
 
-                    </ul>
-                    <%})%>
-            </div>
-            <div class="card" style="width: 18rem; height:15rem; margin-left: 0px;margin-top: 100px; ">
+           
+            
+            <div class="card" style="width: 18rem; height:15rem; margin-left: 0px;margin-top: 50px; ">
                 <div class="card-header" style="font-weight: bold; letter-spacing:3px; text-transform: uppercase;">
                     Categories
                 </div>
@@ -86,34 +69,50 @@
                                             <a href="/news?categories=<%=text%>">
                                                 <li class="list-group-item">
                                                     <%=text%>
-                                    </li>
-                            </a>
-                        </ul>
+                                                </li>
+                                            </a>
+                                        </ul>
+                                        <%})%>
+            </div>
+            <div class="card" style="width: 18rem; height:15rem;  margin-top: 20px;">
+                <div class="card-header" style="font-weight: bold; letter-spacing:3px; text-transform: uppercase;">
+                    Featured
+                </div>
+                <%news.slice(0,4).forEach((news)=>{%>
+                    <ul class="list-group list-group-flush">
+                        <a href="/news/<%=news._id%>">
+                            <li class="list-group-item">
+                                <%=news.heading.slice(0,50)%>
+                            </li>
+                        </a>
+                    </ul>
                     <%})%>
             </div>
-            </div>
         </div>
+    </div>
 
 
 
-        <%if(results.next &&results.next.page<=results.count){%>
-            <a href="/news?page=<%=results.next.page%>&limit=8">
-                next
-            </a>
-            <%}%>
-                <%for(i=1; i<=results.count; i++){%>
-                    <a href="/news?page=<%=i%>&limit=8">
-                        <%=i%>
-                    </a>
-                    <%}%>
+    <%if(results.next &&results.next.page<=results.count){%>
+        <a href="/news?page=<%=results.next.page%>&limit=8">
+            next
+        </a>
+        <%}%>
+            <%for(i=1; i<=results.count; i++){%>
+                <a href="/news?page=<%=i%>&limit=8">
+                    <%=i%>
+                </a>
+                <%}%>
 
-                        <%if(results.previous){%>
-                            <a href="/news?page=<%=results.previous.page%>&limit=3">
-                                previews
-                            </a>
-                            <%}%>
+                    <%if(results.previous){%>
+                        <a href="/news?page=<%=results.previous.page%>&limit=3">
+                            previews
+                        </a>
+                        <%}%>
 
 
-                                <script src="/javascript/news.js"></script>
+                            <script src="/javascript/news.js"></script>
 
-                                <%- include("../partials/footer") %>
+                            </div>
+
+                          

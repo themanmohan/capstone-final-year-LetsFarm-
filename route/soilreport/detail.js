@@ -85,12 +85,22 @@ router.post('/', isLoggedIn, upload.single('image'), (req, res) => {
             detail.save();
             req.flash(
                 'success_msg',
-                'detail created succesfully'
+                'Photo uploaded successfully we will reply you with in day'
             );
             res.redirect('back');
         }
     });
 });
+
+router.get("/:id",(req,res)=>{
+    SoilDetail.findById(req.params.id,(err,founddata)=>{
+        if (err) {
+            console.log(err);
+        }
+        res.render("soilreport/fullImage",{founddata})
+
+    })
+})
 
 //@desc      delete detail and   snapshot
 //@route     DELETE/soildetails/detail_id/delete

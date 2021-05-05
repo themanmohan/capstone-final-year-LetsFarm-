@@ -1,23 +1,87 @@
 <%- include('../partials/header.ejs') %>
+<link rel="stylesheet" href="/css/expert.css">
 
-        
-       
-   
+<div class="container1 ">
+    <div class="container ">
+        <div class="row mt-3">
+            <div class="col-md-8 offset-md-2">
+                <%- include("../partials/message") %>
+            </div>
+        </div>
+    </div>
     <div class="container">
-        <%if(!expert.length){%>
-            no expert found
-            <%}else{%>
-                <% expert.forEach(function(expert) { %>
-                    <div class="row">
+            <%if(!expert.length){%>
+                no expert found
+                <%}else{%>
+                    <% expert.forEach(function(expert) { %>
+                        <div class="row">
+                            <div class="col-md-5 mt-4">
+                                <div class="thumbnail">
+                                    <img style="width: 90%; border-radius: 20px;" class="img-responsive" src="data:image/<%=expert.img.contentType%>;base64,
+					                  <%=expert.img.data.toString('base64')%>">
+                                    <div class="caption">
+                                        <h5  style="text-align: center; margin-top: 10px;">
+                                            <% if (expert.rating===0) { %>
+                                                <em>No reviews yet.</em>
+                                                <% } else { %>
+                                                    <p>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span
+                                                            class="fa fa-star <% if (expert.rating > 1.5) { %> checked <% } %>"></span>
+                                                        <span
+                                                            class="fa fa-star <% if (expert.rating > 2.5) { %> checked <% } %>"></span>
+                                                        <span
+                                                            class="fa fa-star <% if (expert.rating > 3.5) { %> checked <% } %>"></span>
+                                                        <span
+                                                            class="fa fa-star <% if (expert.rating > 4.5) { %> checked <% } %>"></span>
+                                                    </p>
+                                                    <%}%>
+                                        </h5>
 
-                        <div class="col-md-6">
-                            <div class="thumbnail">
-                                <img class="img-responsive" src="data:image/<%=expert.img.contentType%>;base64,
-					<%=expert.img.data.toString('base64')%>">
-                                <div class="caption-full">
-                                    <h4 class="pull-right">
+                                        <h4 style="text-align: center;"> 
+                                               Name:- <%=expert.name%>
+                                            </h4>
+                                            <h5 style=" text-align: center;">
+                                                <%= expert.qualification %>
+                                            </h5>
+                                        <p style="padding: 10px;">
+                                            <%= expert.desc %>
+                                        </p>
+                                        
+                                        <%if(currentUser.role.includes('admin')){%>
+
+
+                                            <div style="display: flex;justify-content: space-around;">
+                                                <a class="btn btn-sm  btn-warning" href="/experts/<%= expert._id %>/edit">Edit</a>
+                                                <form id="delete-form" style="display: inline-block;" action="/experts/<%= expert._id %>/delete?_method=DELETE"
+                                                    method="POST">
+                                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                                </form>
+                                            </div>
+                                            <%}%>
+                                            <%if(currentUser.role.includes('user')){%>
+                                              
+                                                <div style="display: flex; justify-content: space-between;">
+                                                    <a class="btn btn-sm" style="text-align: right; color: wheat; background-color: #440a67;"
+                                                        href="/experts/<%=expert._id %>/qustion/new">Ask Qustion</a>
+                                                    <a class="btn  btn-sm <% if (currentUser && expert.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>"
+                                                        href="/experts/<%= expert._id %>/reviews/new" style=" color:wheat;background-color: #440a67;">
+                                                        Write a New Review</a>
+                                                </div>
+                                             <%}%>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- -------------------
+                            -------------------- -->
+                            <!--Review section-->
+                            <div class="col-md-6 offset-md-1">
+                                <div class="thumbnail">
+                                    <div class="caption-full">
                                         <% if (expert.rating===0) { %>
-                                            <em>No reviews yet.</em>
+                                            <h5>
+                                                <em>No reviews yet.</em>
+                                            </h5>
                                             <% } else { %>
                                                 <p>
                                                     <span class="fa fa-star checked"></span>
@@ -29,148 +93,114 @@
                                                         class="fa fa-star <% if (expert.rating > 3.5) { %> checked <% } %>"></span>
                                                     <span
                                                         class="fa fa-star <% if (expert.rating > 4.5) { %> checked <% } %>"></span>
+                                                    <em>(total reviews: <%= expert.reviews.length %>)</em>
                                                 </p>
-                                                <%}%>
+                                                <p>
+                                                    Current expert rating: <strong>
+                                                        <%= expert.rating.toFixed(2) %>
+                                                    </strong>
+                                                </p>
+                                                <p>
+                                                <h4>Latest reviews for this Expert:</h4>
+                                                </p>
+                                                <hr style="margin-top: 0;">
 
-                                    </h4>
-                                    <h4><a href="/users/follow/<%= expert.author.id%>"><button class="btn btn-primary">Follow</button></a></h4>
-                                    <h4><a>
-                                            <%=expert.name%>
-                                        </a></h4>
-                                    <p>
-                                        <%= expert.description %>
-                                    </p>
-                                    <%if(currentUser.role.includes('admin')){%>
-
-
-                                        <a class="btn btn-xs btn-warning"
-                                            href="/experts/<%= expert._id %>/edit">Edit</a>
-                                        <form id="delete-form" style="display: inline-block;"
-                                            action="/experts/<%= expert._id %>/delete?_method=DELETE" method="POST">
-                                            <button class="btn btn-xs btn-danger">Delete</button>
-                                        </form>
-                                        <%}%>
-
-                                            <div style="margin-top: 10px;">
-                                                <a class="btn btn-default" href="/AllIndia"><i
-                                                        class="fa fa-arrow-left"></i> Go
-                                                    back</a>
-                                            </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Review section-->
-                        <div class="col-md-6">
-                            <div class="thumbnail">
-                                <div class="caption-full">
-                                    <% if (expert.rating===0) { %>
-                                        <h5>
-                                            <em>No reviews yet.</em>
-                                        </h5>
-                                        <% } else { %>
-                                            <p>
-                                                <span class="fa fa-star checked"></span>
-                                                <span
-                                                    class="fa fa-star <% if (expert.rating > 1.5) { %> checked <% } %>"></span>
-                                                <span
-                                                    class="fa fa-star <% if (expert.rating > 2.5) { %> checked <% } %>"></span>
-                                                <span
-                                                    class="fa fa-star <% if (expert.rating > 3.5) { %> checked <% } %>"></span>
-                                                <span
-                                                    class="fa fa-star <% if (expert.rating > 4.5) { %> checked <% } %>"></span>
-                                                <em>(total reviews: <%= expert.reviews.length %>)</em>
-                                            </p>
-                                            <p>
-                                                Current expert rating: <strong>
-                                                    <%= expert.rating.toFixed(2) %>
-                                                </strong>
-                                            </p>
-                                            <p>
-                                            <h4>Latest reviews for this Expert:</h4>
-                                            </p>
-                                            <hr style="margin-top: 0;">
-
-                                            <% expert.reviews.slice(0, 2).forEach(function(review){ %>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <%- '<span class="fa fa-star checked"></span>'
-                                                            .repeat(review.rating) %>
-                                                            <%- '<span class="fa fa-star"></span>' .repeat(5 -
-                                                                review.rating) %>
-                                                                <div>Review by: <strong>
-                                                                        <%= review.author.username %>
-                                                                    </strong></div>
-                                                                <span><em>
-                                                                        <%= review.updatedAt.toDateString() %>
-                                                                    </em></span>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <p style="text-align: justify; word-wrap: break-word;">
-                                                            <%= review.text %>
-                                                        </p>
-                                                        <% if(currentUser && review.author.id.equals(currentUser._id)){
-                                                            %>
-                                                            <a class="btn btn-xs btn-warning"
-                                                                href="/experts/<%=expert._id %>/reviews/<%=review._id %>/edit">Edit</a>
-                                                            <form id="delete-form" style="display: inline-block;"
-                                                                action="/experts/<%=expert._id %>/reviews/<%=review._id %>?_method=DELETE"
-                                                                method="POST">
-                                                                <input type="submit" class="btn btn-xs btn-danger"
-                                                                    value="Delete">
-                                                            </form>
-                                                            <% } %>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <% }); %>
-                                                    <div style="margin-bottom: 10px;">
-                                                        <h4><a href="/experts/<%= expert._id %>/reviews"><i
-                                                                    class="fa fa-search" aria-hidden="true"></i> See all
-                                                                reviews</a>
-                                                        </h4>
-                                                    </div>
-                                                    <% } %>
-                                                        <div>
-                                                            <a class="btn btn-primary btn-lg <% if (currentUser && expert.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>"
-                                                                href="/experts/<%= expert._id %>/reviews/new">
-                                                                Write a New Review</a>
+                                                <% expert.reviews.slice(0, 2).forEach(function(review){ %>
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <%- '<span class="fa fa-star checked"></span>'
+                                                                .repeat(review.rating) %>
+                                                                <%- '<span class="fa fa-star"></span>' .repeat(5 -
+                                                                    review.rating) %>
+                                                                    <div>Review by: <strong>
+                                                                            <%= review.author.username %>
+                                                                        </strong></div>
+                                                                    <span><em>
+                                                                            <%= review.updatedAt.toDateString() %>
+                                                                        </em></span>
                                                         </div>
+                                                        <div class="col-md-9">
+                                                            <p style="text-align: justify; word-wrap: break-word;">
+                                                                <%= review.text %>
+                                                            </p>
+                                                            <% if(currentUser &&
+                                                                review.author.id.equals(currentUser._id)){ %>
+                                                                <a class="btn btn-sm btn-warning"
+                                                                    href="/experts/<%=expert._id %>/reviews/<%=review._id %>/edit">Edit</a>
+                                                                <form id="delete-form" style="display: inline-block;"
+                                                                    action="/experts/<%=expert._id %>/reviews/<%=review._id %>?_method=DELETE"
+                                                                    method="POST">
+                                                                    <button type="submit" class="btn btn-sm btn-danger"
+                                                                        value="Delete">Delete</button>
+                                                                </form>
+                                                                <% } %>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <% }); %>
+                                                        <div style="margin-bottom: 10px;">
+                                                            <h4><a href="/experts/<%= expert._id %>/reviews"><i
+                                                                        class="fa fa-search" aria-hidden="true"></i> See
+                                                                    all
+                                                                    reviews</a>
+                                                            </h4>
+                                                        </div>
+                                                        <% } %>
+                                                            <div>
+                                                                <a class="btn  btn-sm <% if (currentUser && expert.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>"
+                                                                    href="/experts/<%= expert._id %>/reviews/new" style=" color:wheat;background-color: #440a67;">
+                                                                    Write a New Review</a>
+                                                            </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 class="float-right">
-                                    <% if(currentUser){ %>
-                                        <a class="btn btn-xs btn-warning"
-                                            href="/experts/<%=expert._id %>/qustion/new">Add qustion</a>
-                                        <% } %>
-                                </h4>
-
-                                <%expert.qustion.filter((qus)=>{%>
-                                    <%if(qus.author.username===currentUser.name){%>
-
-                                        <h2>qustion</h2>
-                                        <p>
-                                            <%=qus.text%>
-                                        </p>
-                                                <%qus.answer.forEach(ans=>{%>
-                                                    <h2>Anwer</h2>
-                                                    <%=ans.text%>
-                                                        <%})%>
-                                                            <%}%>
-                                                                <%})%>
+<main class="d-flex align-items-center mt-5 mb-5">
+    <div class="container ">
+        <div class="card news-card">
+            <div class="row no-gutters">
+                        <div class="container m-3">
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="add">
+                                    <h4 class="float-right">
+                                        <% if(currentUser){ %>
+                                            <a class="btn btn-sm mr-4 mb-3"  style=" color:wheat;background-color: #440a67;"
+                                                href="/experts/<%=expert._id %>/qustion/new">Ask  Qustion</a>
+                                            <% } %>
+                                    </h4>
+</div>
+                                    <%expert.qustion.filter((qus)=>{%>
+                                        <%if(qus.author.username===currentUser.name){%>
+                                            <div id="qustion">
+                                            <h4>Qustion</h4>
+                                            <p >
+                                                <%=qus.text%>
+                                            </p>
+                                            </div>
+                                            
+                                            <%qus.answer.forEach(ans=>{%>
+                                                <div id="answer" >
+                                                      <h4>Answer</h4>
+                                               <p><%=ans.text%></p>
+                                                </div>
+                                               
+                                                    <%})%>
+                                                        <%}%>
+                                                            <%})%>
+                                </div>
                             </div>
                         </div>
-                    </div>
+</div>
+</div>
+</div>
+</main>
+            </div>
+
+        <% }) %>
+    </div>
+    <%}%>
 
     </div>
 
-    <% }) %>
-        </div>
-        <%}%>
-
-            <%- include('../partials/footer.ejs') %>
+        <%- include('../partials/footer.ejs') %>

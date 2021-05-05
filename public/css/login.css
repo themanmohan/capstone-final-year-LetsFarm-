@@ -165,4 +165,11 @@ body {
   color: #919aa3;
 }
 
+.checked{
+  color: #FFDF00;
+}
+
+table{
+  text-align: center;
+}
 /*# sourceMappingURL=login.css.map */

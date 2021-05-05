@@ -85,7 +85,7 @@ app.use('/punjabcropdetail', require("./route/cropDetail/Punjab"))
 app.use('/upcropdetail', require("./route/cropDetail/UP"))
 app.use('/haryanacropdetail', require("./route/cropDetail/Haryana"))
 app.use('/westbengalcropdetail', require("./route/cropDetail/WestBengal"))
-app.use('/AllIndia', AllIndiaRoute)
+app.use('/', AllIndiaRoute)
 app.use('/users', AuthRoute) 
 app.use('/news', NewsRoute)
 app.use('/msp', MSPRoute)
@@ -100,7 +100,7 @@ app.use('/experts/:expert_id/qustion/:qustion_id/answer', AnswerRoute)
 
 
 
-const PORT = process.env.PORT || 6000
+const PORT = process.env.PORT || 5000
 app.listen(PORT, (err, data) => {
     console.log("running at 5000")
 })

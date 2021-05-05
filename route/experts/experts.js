@@ -60,7 +60,7 @@ router.get("/showexpert",isLoggedIn, function (req, res) {
             // sorting the populated reviews array to show the latest first
         }).exec(function (err, expert) {
         if (err || !expert) {
-            req.flash("error", "some thing went wrong");
+            req.flash("error_msg", "some thing went wrong");
             return res.redirect("back");
         }
         res.render('experts/showexpert', {
@@ -97,7 +97,7 @@ router.get("/admindashboard", isLoggedIn,authorize('admin'), function (req, res)
         // sorting the populated reviews array to show the latest first
     }).exec(function (err, expert) {
         if (err || !expert) {
-            req.flash("error", "some thing went wrong");
+            req.flash("error_msg", "some thing went wrong");
             return res.redirect("back");
         }
         res.render('experts/adminDashboard', {
@@ -124,6 +124,7 @@ router.post('/addexpert',isLoggedIn,authorize('admin'), upload.single('image'), 
     var obj = {
         name: req.body.name,
         desc: req.body.desc,
+        qualification: req.body.qualification,
         img: {
             data: fs.readFileSync(path.join(__dirname, '../../', '/public/uploads/' + req.file.filename)),
             contentType: 'image/png'
@@ -177,7 +178,7 @@ router.delete("/:expert_id/delete",isLoggedIn,authorize('admin'), function (req,
                 }
                 //  delete the expert
                 expert.remove();
-                req.flash("success", "expert delete deleted successfully!");
+                req.flash("success_msg", "expert delete deleted successfully!");
                 res.redirect("back");
             });
             });

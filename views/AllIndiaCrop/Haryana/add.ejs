@@ -1,25 +1,40 @@
-<%- include("../../partials/header") %>
-    <h1>add detail and prodcut</h1>
-    <div style="width: 30%; margin: 25px auto;">
-        <form action="/haryanacropdetail" method="POST">
-            <div>
-                <label for="name">product</label>
-                <input type="text" id="name" placeholder="Name" value="" name="cropdetail[product]" required>
-            </div>
 
-            <div>
-                <label for="msp">MSP</label>
-                <input type="number" id="name" placeholder="quantity" value="" name="cropdetail[quantity]" required>
-            </div>
-            <div>
-                <label for="msp">Increament</label>
-                <input type="number" id="name" value="" name="cropdetail[increase]" required>
-            </div>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
-        </form>
-    </div>
-    </div>
 
-    <%- include("../../partials/footer") %>
+    <%- include("../../partials/header") %>
+    <main class="d-flex align-items-center min-vh-100 py-3 py-md-0 mt-5">
+        <div class="container ">
+            <div class="card news-card">
+                <div class="row no-gutters">
+    
+                    <div class="col-md-10 offset-md-1">
+                        <div class="card-body">
+    
+                            <h3 style="text-align: center;">Add Detail</h3>
+                            <h3 style="text-align: center;">Harayana </h3>
+                                <form action="/haryanacropdetail" method="POST">
+                                    <div class="form-group">
+                                        <label for="name">product Name</label>
+                                        <input type="text" class="form-control" id="name" placeholder="product" value=""
+                                            name="cropdetail[product]" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="quantity">quantity(In Quintal)</label>
+                                        <input type="number" class="form-control" id="name" placeholder="quantity" value=""
+                                            name="cropdetail[quantity]" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Increament">Increament</label>
+                                        <input type="number" class="form-control" id="name" value=""
+                                            name="cropdetail[increase]">
+                                    </div>
+                                    <button type="submit" class="login-button">Login</button>
+                                </form>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    
+        <%- include("../../partials/footer") %>

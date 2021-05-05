@@ -1,0 +1,34 @@
+/*!
+ * Start Bootstrap - Small Business (https://startbootstrap.com/template/small-business)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-small-business/blob/master/LICENSE)
+ */
+body {
+  padding-top: 56px;
+}
+.btn-smart {
+  background-color: #440a67; /* Green */
+  border: none;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+.smart-nav {
+  color: #fff;
+  font-size: 18px;
+  font-family: century gothic;
+  font-weight: normal;
+}
+.holder-info {
+  background-color: #440a67;
+  border-radius: 20px;
+}
+.holder-info-2 {
+  background-color: #440a67;
+}

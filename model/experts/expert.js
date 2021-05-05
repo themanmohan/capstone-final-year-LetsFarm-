@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var expertsSchema = new mongoose.Schema({
     name: String,
     desc: String,
+    qualification:String,
     img: {
         data: Buffer,
         contentType: String

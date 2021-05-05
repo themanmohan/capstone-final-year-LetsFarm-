@@ -1,11 +1,11 @@
 <%- include("../partials/header") %>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 style="text-align: center">Review Page: <%= expert.name %>
+    <div class="container " >
+        <div class="row" >
+            <div class="col-md-12" style="margin-top: 70px;">
+                <h1 style="text-align: center">Review For: <%= expert.name %>
                 </h1>
-                <a href="/experts/showexpert">Go back to the campground page</a>
+               
                 <div class="thumbnail">
                     <div class="caption-full">
                         <% if (expert.rating===0) { %>
@@ -22,12 +22,12 @@
                                     <em>(total reviews: <%= expert.reviews.length %>)</em>
                                 </p>
                                 <p>
-                                    Current campground rating: <strong>
+                                    Current Expert rating: <strong>
                                         <%= expert.rating.toFixed(2) %>
                                     </strong>
                                 </p>
                                 <p>
-                                <h4>All reviews for this campground:</h4>
+                                <h4>All reviews for this Expert:</h4>
                                 </p>
                                 <hr style="margin-top: 0;">
                                 <% expert.reviews.forEach(function(review){ %>
@@ -47,12 +47,12 @@
                                                 <%= review.text %>
                                             </p>
                                             <% if(currentUser && review.author.id.equals(currentUser._id)){ %>
-                                                <a class="btn btn-xs btn-warning" 
+                                                <a class="btn btn-xs btn-warning ml-2" 
                                                     href="/experts/<%=expert._id %>/reviews/<%=review._id %>/edit" style="display:inline-block;">Edit</a>
                                                 <form id="delete-form"
                                                     action="/experts/<%=expert._id %>/reviews/<%=review._id %>?_method=DELETE"
                                                     method="POST">
-                                                    <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                                    <button type="submit" class="btn  btn-danger mt-2" value="Delete">Delete</button>
                                                 </form>
                                                 <% } %>
                                         </div>

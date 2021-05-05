@@ -1,12 +1,25 @@
 <%- include("../partials/header") %>
 
+<%console.log(success_msg)%>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2">
+      
+        <div class="row" style="height: 85vh; ">
+           
+            <div class="col-md-2" style="background-color: rgb(238, 236, 232);">
                 <%- include("../partials/adminSideBar") %>
                
             </div>
-            <div class="col-md-10">
+            <div class="col-md-10" style="background-color: rgb(179, 177, 174); ">
+              
+                <h3 class="" style="margin-top: 70px; margin-bottom: 30px; text-align: center; color:#440a67 ;">Admin DashBoard For
+                    Soil Report Upload </h3>
+                    <div class="container ">
+                        <div class="row mt-3">
+                            <div class="col-md-8 offset-md-2">
+                                <%- include("../partials/message") %>
+                            </div>
+                        </div>
+                    </div>
 <table class="table">
     <thead>
         <tr>
@@ -27,9 +40,9 @@
             <td><%=data.name%></td>
             <td><%=data.email%></td>
             
-            <td><img style="height: 50px; width: 100px;" class="img-responsive" src="data:image/<%=data.img.contentType%>;base64,
+            <td><a href="/soildetails/<%=data.id%>"><img style="height: 50px; width: 100px;" class="img-responsive" src="data:image/<%=data.img.contentType%>;base64,
             	<%=data.img.data.toString('base64')%>"></td>
-                <td>
+                </a><td>
                     <a  class="btn btn-xs btn-warning <% if (currentUser && data.report.some(function (report) {return report.author.id.equals(currentUser._id)})) { %>
     disabled <% } %>"  href="/soildetails/<%=data._id %>/report/new">Add report</a> //
 

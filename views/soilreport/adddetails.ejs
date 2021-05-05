@@ -1,44 +1,52 @@
 <%- include("../partials/header") %>
-    <div class="container">
+    <div class=" " style="height: 85vh; padding-top: 80px; background-color: rgb(228, 225, 225);">
+        <div class="container ">
+            <div class="row mt-3">
+                <div class="col-md-8 offset-md-2">
+                    <%- include("../partials/message") %>
+                </div>
+            </div>
+        </div>
+        <%if(!detail.report) {%>
         <div class="row">
-            <h1 class="demo" style="text-align: center">Add snapshot of photo
-            </h1>
-            <div style="width: 30%; margin: 25px auto;">
+
+            <div style="width: 30%; margin: 25px auto; text-align: center;">
+                <h4 class="demo" style="text-align: center">Upload snapshot of soil for Report
+                </h4>
                 <form action="/soildetails" method="POST" enctype="multipart/form-data">
-                    <label for="image">Upload Image</label>
-                    <input   type="file" id="image" name="image"  required  <% if (currentUser && detail.some(function (detail) {return detail.author.id.equals(currentUser._id)})) { %>
-    disabled <% } %>>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary btn-block  <% if (currentUser && detail.some(function (detail) {return detail.author.id.equals(currentUser._id)})) { %>
-    d-none <% } %>">Submit detail</button>
-            </div>
+                    <input style="margin-left: 90px; text-align: center;" type="file" id="image" name="image" required <% if (currentUser &&
+                        detail.some(function (detail) {return detail.author.id.equals(currentUser._id)})) { %>
+                    disabled <% } %>>
+
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-success mt-3  <% if (currentUser && detail.some(function (detail) {return detail.author.id.equals(currentUser._id)})) { %>
+                        d-none <% } %>">Upload</button>
+                        </div>
             </form>
 
         </div>
-    </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
-                <%if(detail) {%>
-                    <%detail.filter(detail=>{%>
-                        <%if(detail.name===currentUser.name){%>
-                            <%detail.report.forEach(report=>{%>
-                                <div class="container bg-success">
-                                <div class="report">
-                                    <%=report.report%>
-                                </div>
-                                </div>
-                               
-                                    <%})%>
-                                        <%}%>
-                                            <%})%>
-                                                <%}%>
+        <%}%>
+        <div class="container">
+            
+            <div class="row">
+               
+                <div class="col-md-12 p-2" style="overflow: scroll; height: 300px;">
+                    <%if(detail) {%>
+                        <%detail.filter(detail=>{%>
+                            <%if(detail.name===currentUser.name){%>
+                                <%detail.report.forEach(report=>{%>
+                                    <div class="container ">
+        <h4 style="margin: 0 auto; text-align: center;">Soil Report</h4>
+                                        <%=report.report%>
+                                    </div>
+                                <%})%>
+                            <%}%>
+                        <%})%>
+                    <%}%>
+                </div>
             </div>
         </div>
     </div>
-
-
+   </div>
 
     <%- include("../partials/footer") %>
